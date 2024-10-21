@@ -1,94 +1,97 @@
 package edu.bsu.cs;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-
+import java.io.IOException;
+import java.util.Objects;
 
 public class WaitlistGUI extends Application {
-    private WaitlistManager waitlistManager;
-    private ListView<Party> listView;
-    private TextField nameField;
-    private TextField sizeField;
-    private TextField phoneField;
-    private TextField waitTimeField;
+    private VBox partyListVBOX;
 
     public static void main(String[] args) {
         launch(args);
+        
     }
 
     @Override
-    public void start(Stage primaryStage) {
-        waitlistManager = new WaitlistManager();
+    public void start(Stage mainStage) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("MainScene.fxml")));
 
-        listView = new ListView<>();
-        listView.getItems().addAll(waitlistManager.getWaitlist());
+        partyListVBOX = (VBox) root.lookup("#partyListVBox");
 
-        nameField = new TextField();
-        sizeField = new TextField();
-        phoneField = new TextField();
-        waitTimeField = new TextField();
+        Button addGuestButton = (Button) root.lookup("#addGuestButton");
+        addGuestButton.setOnAction(e -> showAddPartyScreen());
 
-        Button addButton = new Button("Add Party");
-        addButton.setOnAction(e -> addParty());
-
-        Button removeButton = new Button("Remove Party");
-        removeButton.setOnAction(e -> removeParty());
-
-        VBox inputFields = new VBox(10, new Label("Name:"), nameField,
-                new Label("Size:"), sizeField,
-                new Label("Phone Number:"), phoneField,
-                new Label("Wait Time (min):"), waitTimeField,
-                addButton, removeButton);
-
-        inputFields.setPadding(new Insets(10));
-        inputFields.setPrefWidth(250);
-
-        HBox mainLayout = new HBox(10, listView, inputFields);
-        Scene scene = new Scene(mainLayout, 600, 400);
-
-        primaryStage.setTitle("Restaurant Waitlist");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        mainStage.setScene(new Scene(root));
+        mainStage.show();
     }
 
-    private void addParty() {
-        String name = nameField.getText();
-        int size = Integer.parseInt(sizeField.getText());
-        String phone = phoneField.getText();
-        long waitTime = Long.parseLong(waitTimeField.getText());
+    private void showAddPartyScreen() {
 
-        Party newParty = new Party(name, size, phone, waitTime);
-        waitlistManager.addParty(newParty);
-        updateWaitlistDisplay();
+        Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.setTitle("Add Party");
 
-        clearFields();
+        TextField sizeField = new TextField();
+        TextField nameField = new TextField();
+        TextField phoneField = new TextField();
+        TextField waitTimeField = new TextField();
+
+        VBox dialogVbox = new VBox(10, new Label("Size:"), sizeField, new Label("Name:"), nameField,
+                new Label("Phone Number:"), phoneField, new Label("Wait Time:"), waitTimeField);
+        dialogVbox.setPadding(new Insets(20));
+
+        Button addButton = new Button("Add");
+        addButton.setOnAction(e -> {
+            addPartyToList(sizeField.getText(), nameField.getText(), phoneField.getText(), waitTimeField.getText());
+            dialog.close();
+        });
+
+        dialogVbox.getChildren().add(addButton);
+        Scene dialogScene = new Scene(dialogVbox, 300, 400);
+        dialog.setScene(dialogScene);
+        dialog.showAndWait();
     }
 
-    private void removeParty() {
-        Party selectedParty = listView.getSelectionModel().getSelectedItem();
-        if (selectedParty != null) {
-            waitlistManager.removeParty(selectedParty);
-            updateWaitlistDisplay();
-        }
-    }
+    private void addPartyToList(String size, String name, String phoneNumber, String waitTime) {
+        HBox partyHBox = new HBox(0);
+        partyHBox.setPrefHeight(60);
 
-    private void updateWaitlistDisplay() {
-        listView.getItems().clear();
-        listView.getItems().addAll(waitlistManager.getWaitlist());
-    }
+        TextField sizeField = new TextField(size);
+        sizeField.setAlignment(Pos.CENTER);
+        sizeField.setPrefHeight(45);
+        sizeField.setPrefWidth(120);
+        sizeField.setStyle("-fx-font-size: 21px");
 
-    private void clearFields() {
-        nameField.clear();
-        sizeField.clear();
-        phoneField.clear();
-        waitTimeField.clear();
+        TextField nameField = new TextField(name);
+        nameField.setAlignment(Pos.CENTER);
+        nameField.setPrefHeight(45);
+        nameField.setPrefWidth(262);
+        nameField.setStyle("-fx-font-size: 21px");
+
+        TextField phoneField = new TextField(phoneNumber);
+        phoneField.setAlignment(Pos.CENTER);
+        phoneField.setPrefHeight(45);
+        phoneField.setPrefWidth(198);
+        phoneField.setStyle("-fx-font-size: 21px");
+
+        TextField waitTimeField = new TextField(waitTime);
+        waitTimeField.setAlignment(Pos.CENTER);
+        waitTimeField.setPrefHeight(45);
+        waitTimeField.setPrefWidth(149);
+        waitTimeField.setStyle("-fx-font-size: 21px");
+
+        partyHBox.getChildren().addAll(sizeField, nameField, phoneField, waitTimeField);
+
+        partyListVBOX.getChildren().add(partyHBox);
     }
 }

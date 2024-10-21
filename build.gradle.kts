@@ -14,8 +14,8 @@ repositories {
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-    implementation("org.openjfx:javafx-controls:17")
-    implementation("org.openjfx:javafx-fxml:17")
+    implementation("org.openjfx:javafx-controls:23.0.1")
+    implementation("org.openjfx:javafx-fxml:23.0.1")
 }
 
 tasks.test {
