@@ -1,6 +1,7 @@
 package edu.bsu.cs;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -8,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -30,10 +32,32 @@ public class WaitlistGUI extends Application {
 
         Button addGuestButton = (Button) root.lookup("#addGuestButton");
         addGuestButton.setOnAction(e -> showAddPartyScreen());
+        Button removeGuestButton = (Button) root.lookup("#removeGuestButton");
+
+        removeGuestButton.setOnAction(e -> removeSelectedParty(partyListVBOX));
 
         mainStage.setScene(new Scene(root));
         mainStage.show();
     }
+
+    private void removeSelectedParty(Pane container) {
+        ObservableList<Node> children = container.getChildren();
+        for (int i = 0; i < children.size(); i++) {
+            if (children.get(i) instanceof HBox hbox && hbox.getStyle().contains("lightblue")) {
+                children.remove(hbox);
+                return;
+            }
+        }
+        showAlert();
+    }
+    private void showAlert() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Input Error");
+        alert.setHeaderText(null);
+        alert.setContentText("No party selected to remove.");
+        alert.showAndWait();
+    }
+
 
     private void showAddPartyScreen() {
 
