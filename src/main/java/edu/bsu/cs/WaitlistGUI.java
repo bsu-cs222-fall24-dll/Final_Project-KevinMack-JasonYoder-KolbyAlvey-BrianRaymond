@@ -63,35 +63,54 @@ public class WaitlistGUI extends Application {
     }
 
     private void addPartyToList(String size, String name, String phoneNumber, String waitTime) {
-        HBox partyHBox = new HBox(0);
-        partyHBox.setPrefHeight(60);
+        HBox partyHBox = new HBox(10);
+        partyHBox.setPrefHeight(45);
 
         TextField sizeField = new TextField(size);
         sizeField.setAlignment(Pos.CENTER);
         sizeField.setPrefHeight(45);
         sizeField.setPrefWidth(120);
         sizeField.setStyle("-fx-font-size: 21px");
+        sizeField.setEditable(false);
 
         TextField nameField = new TextField(name);
         nameField.setAlignment(Pos.CENTER);
         nameField.setPrefHeight(45);
         nameField.setPrefWidth(262);
         nameField.setStyle("-fx-font-size: 21px");
+        nameField.setEditable(false);
 
         TextField phoneField = new TextField(phoneNumber);
         phoneField.setAlignment(Pos.CENTER);
         phoneField.setPrefHeight(45);
         phoneField.setPrefWidth(198);
         phoneField.setStyle("-fx-font-size: 21px");
+        phoneField.setEditable(false);
 
         TextField waitTimeField = new TextField(waitTime);
         waitTimeField.setAlignment(Pos.CENTER);
         waitTimeField.setPrefHeight(45);
         waitTimeField.setPrefWidth(149);
         waitTimeField.setStyle("-fx-font-size: 21px");
+        waitTimeField.setEditable(false);
 
         partyHBox.getChildren().addAll(sizeField, nameField, phoneField, waitTimeField);
 
+        partyHBox.setStyle("-fx-background-color: transparent");
+
+        sizeField.focusedProperty().addListener((obs, oldVal, newVal) -> updatedSelectionState(partyHBox, newVal));
+        nameField.focusedProperty().addListener((obs, oldVal, newVal) -> updatedSelectionState(partyHBox, newVal));
+        phoneField.focusedProperty().addListener((obs, oldVal, newVal) -> updatedSelectionState(partyHBox, newVal));
+        waitTimeField.focusedProperty().addListener((obs, oldVal, newVal) -> updatedSelectionState(partyHBox, newVal));
+
         partyListVBOX.getChildren().add(partyHBox);
+    }
+
+    private void updatedSelectionState(HBox hbox, boolean isSelected) {
+        if (isSelected) {
+            hbox.setStyle("-fx-background-color: lightblue");
+        } else {
+            hbox.setStyle("-fx-background-color: transparent");
+        }
     }
 }
