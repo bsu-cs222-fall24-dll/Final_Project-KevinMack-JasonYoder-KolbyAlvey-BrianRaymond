@@ -61,7 +61,7 @@ public class WaitlistGUI extends Application {
 
         Button addButton = new Button("Add");
         addButton.setOnAction(e -> {
-            partyManager.addParty(sizeField.getText(), nameField.getText(), phoneField.getText(), waitTimeField.getText());
+            partyManager.addParty(Integer.parseInt(sizeField.getText()), nameField.getText(), phoneField.getText(), Integer.parseInt(waitTimeField.getText()));
             dialog.close();
         });
 
