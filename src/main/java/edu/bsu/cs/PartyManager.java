@@ -23,28 +23,29 @@ public class PartyManager {
         PartyID party = new PartyID(size, name, phoneNumber, waitTime);
         partyIDs.add(party);
         HBox partyHBox = createPartyHBox(party);
+        partyHBox.setUserData(party.getName());
         partyListVBOX.getChildren().add(partyHBox);
     }
 
     public void removeParty() {
-        ChoiceDialog<Integer> dialog = new ChoiceDialog<>();
+        ChoiceDialog<String> dialog = new ChoiceDialog<>();
         for (PartyID party : partyIDs) {
-            dialog.getItems().add(party.getId());
+            dialog.getItems().add(party.getName());
         }
         dialog.setTitle("Remove Party");
         dialog.setHeaderText("Select a party to remove:");
-        dialog.showAndWait().ifPresent(selectedId -> {
-            partyIDs.removeIf(party -> party.getId() == selectedId);
-            removePartyFromList(selectedId);
+        dialog.showAndWait().ifPresent(selectedName -> {
+            partyIDs.removeIf(party -> party.getName().equals(selectedName));
+            removePartyFromList(selectedName);
         });
     }
 
-    private void removePartyFromList(Integer selectedId) {
+    private void removePartyFromList(String selectedName) {
         ObservableList<Node> children = partyListVBOX.getChildren();
         children.removeIf(node -> {
             if (node instanceof HBox hbox) {
                 Object userData = hbox.getUserData();
-                return userData != null && userData.equals(selectedId);
+                return userData != null && userData.equals(selectedName);
             }
             return false;
         });
