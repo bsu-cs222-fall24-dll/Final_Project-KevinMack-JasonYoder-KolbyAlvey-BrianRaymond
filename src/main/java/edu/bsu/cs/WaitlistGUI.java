@@ -12,12 +12,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.Objects;
 
 public class WaitlistGUI extends Application {
     private PartyManager partyManager;
+    private Phonebook phonebook;
 
     public static void main(String[] args) {
         launch(args);
@@ -27,7 +27,9 @@ public class WaitlistGUI extends Application {
     public void start(Stage mainStage) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("MainScene.fxml")));
         VBox partyListVBOX = (VBox) root.lookup("#partyListVBox");
-        partyManager = new PartyManager(partyListVBOX);
+
+        phonebook = new Phonebook("restaurantData.csv");
+        partyManager = new PartyManager(partyListVBOX, phonebook);
 
         setupAddGuestButton(root);
         setupRemoveGuestButton(root);
@@ -57,11 +59,15 @@ public class WaitlistGUI extends Application {
         TextField waitTimeField = new TextField();
 
         phoneField.textProperty().addListener((observable, oldValue, newValue) -> phoneField.setText(formatPhoneNumber(newValue)));
+        phoneField.textProperty().addListener((observable, oldValue, newValue) -> {
+            String suggestedName = phonebook.getNameByPhoneNumber(newValue);
+            nameField.setText(Objects.requireNonNullElse(suggestedName, ""));
+        });
 
         VBox dialogVbox = new VBox(10,
-                new Label("Size:"), sizeField,
-                new Label("Name:"), nameField,
                 new Label("Phone Number:"), phoneField,
+                new Label("Name:"), nameField,
+                new Label("Size:"), sizeField,
                 new Label("Wait Time:"), waitTimeField
         );
 

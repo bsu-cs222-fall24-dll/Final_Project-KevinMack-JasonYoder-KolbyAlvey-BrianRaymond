@@ -12,23 +12,27 @@ public class CSVHandler {
     public void addIfNew(String name, String phoneNumber){
         InputStream dataStream = CSVHandler.class.getClassLoader().getResourceAsStream("restaurantData.csv");
 
-        try (CSVReader reader = new CSVReader(new InputStreamReader(dataStream))) {
-            List<String[]> allData = reader.readAll();
-            Boolean match = false;
-            for (String[] row : allData) {
-                if(row[0].equals(phoneNumber)) {
-                    match = true;
+        try {
+            assert dataStream != null;
+            try (CSVReader reader = new CSVReader(new InputStreamReader(dataStream))) {
+                List<String[]> allData = reader.readAll();
+                boolean match = false;
+                for (String[] row : allData) {
+                    if (row[0].equals(phoneNumber)) {
+                        match = true;
+                        break;
+                    }
+                }
+                if(!match) {
+                    String data = "src/main/resources/restaurantData.csv";
+                    CSVWriter writer = new CSVWriter(new FileWriter(data, true));
+                    String[] newGuest = {phoneNumber, name};
+                    writer.writeNext(newGuest);
+                    writer.close();
                 }
             }
-            if(!match) {
-                String data = "src/main/resources/restaurantData.csv";
-                CSVWriter writer = new CSVWriter(new FileWriter(data, true));
-                String[] newGuest = {phoneNumber, name};
-                writer.writeNext(newGuest);
-                writer.close();
-            }
         } catch (Exception exception) {
-            exception.printStackTrace();
+            System.err.println("There was an error reading the CSV file: " + exception.getMessage());
         }
     }
 }
