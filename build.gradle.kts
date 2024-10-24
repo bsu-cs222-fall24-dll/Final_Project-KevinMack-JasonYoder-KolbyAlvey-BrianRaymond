@@ -16,6 +16,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
     implementation("org.openjfx:javafx-controls:23.0.1")
     implementation("org.openjfx:javafx-fxml:23.0.1")
+    implementation("com.opencsv:opencsv:5.7.1")
 }
 
 tasks.test {

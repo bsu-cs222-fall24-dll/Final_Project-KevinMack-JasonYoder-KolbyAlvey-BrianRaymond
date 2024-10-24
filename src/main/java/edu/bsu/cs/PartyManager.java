@@ -1,6 +1,8 @@
 package edu.bsu.cs;
 
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -8,7 +10,6 @@ import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 
 public class PartyManager {
@@ -20,39 +21,41 @@ public class PartyManager {
     }
 
     public void addParty(int size, String name, String phoneNumber, int waitTime) {
+        CSVHandler handler = new CSVHandler();
+        handler.addIfNew(name, phoneNumber);
         Party party = new Party(size, name, phoneNumber, waitTime);
         parties.add(party);
         parties.sort(Comparator.comparingInt(Party::getWaitTime));
-        updatePartyListDisplay();
-    }
-
-    public void removeParty() {
-        HashMap<String, Integer> nameToIdMap = new HashMap<>();
-        ChoiceDialog<String> dialog = new ChoiceDialog<>();
-
-        for (Party party : parties) {
-            String name = party.getName();
-            int id = party.getId();
-            dialog.getItems().add(name);
-            nameToIdMap.put(name, id);
-        }
-
-        dialog.setTitle("Remove Party");
-        dialog.setHeaderText("Select a party to remove:");
-        dialog.showAndWait().ifPresent(selected -> {
-            int idToRemove = nameToIdMap.get(selected);
-            parties.removeIf(party -> party.getId() == idToRemove);
-            updatePartyListDisplay();
-        });
-    }
-
-    private void updatePartyListDisplay() {
         partyListVBOX.getChildren().clear();
         for (Party sortedParty : parties) {
             HBox partyHBox = createPartyHBox(sortedParty);
             partyHBox.setUserData(sortedParty.getName());
             partyListVBOX.getChildren().add(partyHBox);
         }
+    }
+
+    public void removeParty() {
+        ChoiceDialog<String> dialog = new ChoiceDialog<>();
+        for (Party party : parties) {
+            dialog.getItems().add(party.getName());
+        }
+        dialog.setTitle("Remove Party");
+        dialog.setHeaderText("Select a party to remove:");
+        dialog.showAndWait().ifPresent(selectedName -> {
+            parties.removeIf(party -> party.getName().equals(selectedName));
+            removePartyFromList(selectedName);
+        });
+    }
+
+    private void removePartyFromList(String selectedName) {
+        ObservableList<Node> children = partyListVBOX.getChildren();
+        children.removeIf(node -> {
+            if (node instanceof HBox hbox) {
+                Object userData = hbox.getUserData();
+                return userData != null && userData.equals(selectedName);
+            }
+            return false;
+        });
     }
 
     private HBox createPartyHBox(Party party) {
