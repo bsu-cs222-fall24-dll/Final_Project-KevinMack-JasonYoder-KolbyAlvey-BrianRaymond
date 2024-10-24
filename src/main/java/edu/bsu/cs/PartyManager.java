@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 public class PartyManager {
@@ -26,14 +27,20 @@ public class PartyManager {
     }
 
     public void removeParty() {
+        HashMap<String, Integer> nameToIdMap = new HashMap<>();
         ChoiceDialog<String> dialog = new ChoiceDialog<>();
+
         for (Party party : parties) {
-            dialog.getItems().add(party.getName() + " (ID: " + party.getId() + ")");
+            String name = party.getName();
+            int id = party.getId();
+            dialog.getItems().add(name);
+            nameToIdMap.put(name, id);
         }
+
         dialog.setTitle("Remove Party");
         dialog.setHeaderText("Select a party to remove:");
         dialog.showAndWait().ifPresent(selected -> {
-            int idToRemove = Integer.parseInt(selected.split(" \\(ID: ")[1].replace(")", ""));
+            int idToRemove = nameToIdMap.get(selected);
             parties.removeIf(party -> party.getId() == idToRemove);
             updatePartyListDisplay();
         });
