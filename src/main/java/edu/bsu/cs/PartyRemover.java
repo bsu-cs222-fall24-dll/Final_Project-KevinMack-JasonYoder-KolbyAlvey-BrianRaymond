@@ -8,11 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 
 public class PartyRemover extends PartyHBoxBuilder{
-    private final List<Party> partyList;
+    SingletonDataStore data = SingletonDataStore.getInstance();
+    private final List<Party> partyList = data.getPartyList();
     private final VBox partyListVBox;
 
-    public PartyRemover(VBox partyListVBox, List<Party> partyList) {
-        this.partyList = partyList;
+    public PartyRemover(VBox partyListVBox) {
         this.partyListVBox = partyListVBox;
     }
 

@@ -8,8 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class Main extends Application {
@@ -25,11 +23,8 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("MainScene.fxml")));
         VBox partyListVBox = (VBox) root.lookup("#partyListVBox");
 
-        Phonebook phonebook = new Phonebook("restaurantData.csv");
-        List<Party> partyList = new ArrayList<>();
-
-        partyRegister = new PartyRegister(partyListVBox, phonebook, partyList);
-        partyRemover = new PartyRemover(partyListVBox, partyList);
+        partyRegister = new PartyRegister(partyListVBox);
+        partyRemover = new PartyRemover(partyListVBox);
 
         setupAddGuestButton(root);
         setupRemoveGuestButton(root);
