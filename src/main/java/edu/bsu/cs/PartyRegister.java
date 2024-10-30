@@ -10,19 +10,18 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
 public class PartyRegister extends PartyHBoxBuilder {
+    PartyRegisterLogic registerLogic = new PartyRegisterLogic();
+    SingletonDataStore data = SingletonDataStore.getInstance();
+    private final List<Party> partyList = data.getPartyList();
+    private final Phonebook phonebook = data.getPhonebook();
     private final VBox partyListVBOX;
-    private final List<Party> partyList;
-    private final Phonebook phonebook;
 
-    public PartyRegister(VBox partyListVBOX, Phonebook phonebook, List<Party> partyList) {
+    public PartyRegister(VBox partyListVBOX) {
         this.partyListVBOX = partyListVBOX;
-        this.phonebook = phonebook;
-        this.partyList = partyList;
     }
 
     public void showAddPartyScreen() {
@@ -35,7 +34,7 @@ public class PartyRegister extends PartyHBoxBuilder {
         TextField phoneField = new TextField();
         TextField waitTimeField = new TextField();
 
-        phoneField.textProperty().addListener((observable, oldValue, newValue) -> phoneField.setText(formatPhoneNumber(newValue)));
+        phoneField.textProperty().addListener((observable, oldValue, newValue) -> phoneField.setText(registerLogic.formatPhoneNumber(newValue)));
         phoneField.textProperty().addListener((observable, oldValue, newValue) -> {
             String suggestedName = phonebook.getNameByPhoneNumber(newValue);
             nameField.setText(Objects.requireNonNullElse(suggestedName, ""));
@@ -53,7 +52,7 @@ public class PartyRegister extends PartyHBoxBuilder {
         Button addButton = new Button("Add");
 
         addButton.setOnAction(e -> {
-            if(isValidPhoneNumber(phoneField.getText())) {
+            if(registerLogic.isValidPhoneNumber(phoneField.getText())) {
                 addParty(
                         Integer.parseInt(sizeField.getText()),
                         nameField.getText(), phoneField.getText(),
@@ -73,22 +72,14 @@ public class PartyRegister extends PartyHBoxBuilder {
         dialog.showAndWait();
     }
 
-    private String formatPhoneNumber(String input) {
-        String cleaned = input.replaceAll("\\D", "");
-
-        if (cleaned.length() > 6) {
-            return cleaned.substring(0, 3) + "-" + cleaned.substring(3, 6) + "-" + cleaned.substring(6, Math.min(10, cleaned.length()));
-        } else if (cleaned.length() > 3) {
-            return cleaned.substring(0, 3) + "-" + cleaned.substring(3);
-        } else {
-            return cleaned;
+    private void addParty(int size, String name, String phoneNumber, int waitTime) {
+        registerLogic.addPartyToData(size, name, phoneNumber, waitTime);
+        partyListVBOX.getChildren().clear();
+        for (Party sortedParty : partyList) {
+            HBox partyHBox = createPartyHBox(sortedParty);
+            partyHBox.setUserData(sortedParty.getName());
+            partyListVBOX.getChildren().add(partyHBox);
         }
-    }
-
-    private boolean isValidPhoneNumber(String phoneNumber) {
-        String cleaned = phoneNumber.replaceAll("\\D", "");
-
-        return cleaned.isEmpty() || cleaned.length() == 10;
     }
 
     private void showPhoneNumberAlert() {
@@ -99,16 +90,4 @@ public class PartyRegister extends PartyHBoxBuilder {
         alert.showAndWait();
     }
 
-    public void addParty(int size, String name, String phoneNumber, int waitTime) {
-        Party party = new Party(size, name, phoneNumber, waitTime);
-        partyList.add(party);
-        phonebook.addNewEntry(party.getPhoneNumber(), party.getName());
-        partyList.sort(Comparator.comparingInt(Party::getWaitTime));
-        partyListVBOX.getChildren().clear();
-        for (Party sortedParty : partyList) {
-            HBox partyHBox = createPartyHBox(sortedParty);
-            partyHBox.setUserData(sortedParty.getName());
-            partyListVBOX.getChildren().add(partyHBox);
-        }
-    }
 }
