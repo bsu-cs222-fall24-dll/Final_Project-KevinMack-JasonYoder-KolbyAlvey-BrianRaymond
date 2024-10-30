@@ -1,54 +1,31 @@
 package edu.bsu.cs;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import java.io.IOException;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Objects;
 
-public class WaitlistGUI extends Application {
-    private PartyManager partyManager;
-    private Phonebook phonebook;
+public class PartyRegister extends PartyHBoxBuilder {
+    private final VBox partyListVBOX;
+    private final List<Party> partyList;
+    private final Phonebook phonebook;
 
-    public static void main(String[] args) {
-        launch(args);
+    public PartyRegister(VBox partyListVBOX, Phonebook phonebook, List<Party> partyList) {
+        this.partyListVBOX = partyListVBOX;
+        this.phonebook = phonebook;
+        this.partyList = partyList;
     }
 
-    @Override
-    public void start(Stage mainStage) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("MainScene.fxml")));
-        VBox partyListVBOX = (VBox) root.lookup("#partyListVBox");
-
-        phonebook = new Phonebook("restaurantData.csv");
-        partyManager = new PartyManager(partyListVBOX, phonebook);
-
-        setupAddGuestButton(root);
-        setupRemoveGuestButton(root);
-
-        mainStage.setScene(new Scene(root));
-        mainStage.show();
-    }
-
-    private void setupAddGuestButton(Parent root) {
-        Button addGuestButton = (Button) root.lookup("#addGuestButton");
-        addGuestButton.setOnAction(e -> showAddPartyScreen());
-    }
-
-    private void setupRemoveGuestButton(Parent root) {
-        Button removeGuestButton = (Button) root.lookup("#removeGuestButton");
-        removeGuestButton.setOnAction(e -> partyManager.removeParty());
-    }
-
-    private void showAddPartyScreen() {
+    public void showAddPartyScreen() {
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.setTitle("Add Party");
@@ -77,11 +54,12 @@ public class WaitlistGUI extends Application {
 
         addButton.setOnAction(e -> {
             if(isValidPhoneNumber(phoneField.getText())) {
-                partyManager.addParty(
+                addParty(
                         Integer.parseInt(sizeField.getText()),
                         nameField.getText(), phoneField.getText(),
                         Integer.parseInt(waitTimeField.getText())
                 );
+
                 dialog.close();
             } else {
                 showPhoneNumberAlert();
@@ -120,5 +98,17 @@ public class WaitlistGUI extends Application {
         alert.setContentText("Phone number must be left blank or 10 digits long");
         alert.showAndWait();
     }
-}
 
+    public void addParty(int size, String name, String phoneNumber, int waitTime) {
+        Party party = new Party(size, name, phoneNumber, waitTime);
+        partyList.add(party);
+        phonebook.addNewEntry(party.getPhoneNumber(), party.getName());
+        partyList.sort(Comparator.comparingInt(Party::getWaitTime));
+        partyListVBOX.getChildren().clear();
+        for (Party sortedParty : partyList) {
+            HBox partyHBox = createPartyHBox(sortedParty);
+            partyHBox.setUserData(sortedParty.getName());
+            partyListVBOX.getChildren().add(partyHBox);
+        }
+    }
+}

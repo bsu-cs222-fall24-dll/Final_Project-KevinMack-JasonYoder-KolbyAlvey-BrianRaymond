@@ -29,7 +29,7 @@ javafx {
 }
 
 application {
-    mainClass.set("edu.bsu.cs.WaitlistGUI")
+    mainClass.set("edu.bsu.cs.Main")
 }
 
 tasks.withType<JavaExec> {
