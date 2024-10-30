@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class PartyRemover extends PartyHBoxBuilder{
-    SingletonData data = SingletonData.getInstance();
+    SingletonDataStore data = SingletonDataStore.getInstance();
     private final List<Party> partyList = data.getPartyList();
     private final VBox partyListVBox;
 

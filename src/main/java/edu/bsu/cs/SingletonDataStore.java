@@ -3,19 +3,19 @@ package edu.bsu.cs;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SingletonData {
-    private static SingletonData instance;
+public class SingletonDataStore {
+    private static SingletonDataStore instance;
     private final List<Party> partyList;
     private final Phonebook phonebook;
 
-    private SingletonData() {
+    private SingletonDataStore() {
         partyList = new ArrayList<>();
         phonebook = new Phonebook("restaurantData.csv");
     }
 
-    public static SingletonData getInstance() {
+    public static SingletonDataStore getInstance() {
         if (instance == null) {
-            instance = new SingletonData();
+            instance = new SingletonDataStore();
         }
         return instance;
     }

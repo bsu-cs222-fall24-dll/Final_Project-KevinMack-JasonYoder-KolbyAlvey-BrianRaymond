@@ -15,7 +15,7 @@ import java.util.Objects;
 
 public class PartyRegister extends PartyHBoxBuilder {
     PartyRegisterLogic registerLogic = new PartyRegisterLogic();
-    SingletonData data = SingletonData.getInstance();
+    SingletonDataStore data = SingletonDataStore.getInstance();
     private final List<Party> partyList = data.getPartyList();
     private final Phonebook phonebook = data.getPhonebook();
     private final VBox partyListVBOX;

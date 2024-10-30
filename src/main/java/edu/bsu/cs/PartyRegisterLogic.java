@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class PartyRegisterLogic {
-    SingletonData data = SingletonData.getInstance();
+    SingletonDataStore data = SingletonDataStore.getInstance();
     private final List<Party> partyList = data.getPartyList();
     private final Phonebook phonebook = data.getPhonebook();
 

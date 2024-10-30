@@ -26,42 +26,11 @@ public class Main extends Application {
         partyRegister = new PartyRegister(partyListVBox);
         partyRemover = new PartyRemover(partyListVBox);
 
-        setupWaitlistButton(root);
-        setupHostButton(root);
-        setupKitchenButton(root);
-
         setupAddGuestButton(root);
         setupRemoveGuestButton(root);
 
         mainStage.setScene(new Scene(root));
         mainStage.show();
-    }
-
-    private void setupWaitlistButton(Parent root) {
-        Button waitlistButton = (Button) root.lookup("#waitlistButton");
-        waitlistButton.setOnAction(e -> {
-            root.lookup("#waitlistVBox").setVisible(true);
-            root.lookup("#hostVBox").setVisible(false);
-            root.lookup("kitchenVBox").setVisible(false);
-        });
-    }
-
-    private void setupHostButton(Parent root) {
-        Button hostButton = (Button) root.lookup("#hostButton");
-        hostButton.setOnAction(e -> {
-            root.lookup("#hostVBox").setVisible(true);
-            root.lookup("#waitlistVBox").setVisible(false);
-            root.lookup("kitchenVBox").setVisible(false);
-        });
-    }
-
-    private void setupKitchenButton(Parent root) {
-        Button kitchenButton = (Button) root.lookup("#kitchenButton");
-        kitchenButton.setOnAction(e -> {
-            root.lookup("kitchenVBox").setVisible(true);
-            root.lookup("#hostVBox").setVisible(false);
-            root.lookup("#waitlistVBox").setVisible(false);
-        });
     }
 
     private void setupAddGuestButton(Parent root) {
