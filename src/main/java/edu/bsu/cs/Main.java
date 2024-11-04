@@ -21,25 +21,26 @@ public class Main extends Application {
     @Override
     public void start(Stage mainStage) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("MainScene.fxml")));
-        VBox partyListVBox = (VBox) root.lookup("#partyListVBox");
+        Parent waitlist = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("WaitlistScreen.fxml")));
+        VBox partyListVBox = (VBox) waitlist.lookup("#partyListVBox");
 
         partyRegister = new PartyRegister(partyListVBox);
         partyRemover = new PartyRemover(partyListVBox);
 
-        setupAddGuestButton(root);
-        setupRemoveGuestButton(root);
+        setupAddGuestButton(waitlist);
+        setupRemoveGuestButton(waitlist);
 
         mainStage.setScene(new Scene(root));
         mainStage.show();
     }
 
-    private void setupAddGuestButton(Parent root) {
-        Button addGuestButton = (Button) root.lookup("#addGuestButton");
+    private void setupAddGuestButton(Parent waitlist) {
+        Button addGuestButton = (Button) waitlist.lookup("#addGuestButton");
         addGuestButton.setOnAction(e -> partyRegister.showAddPartyScreen());
     }
 
-    private void setupRemoveGuestButton(Parent root) {
-        Button removeGuestButton = (Button) root.lookup("#removeGuestButton");
+    private void setupRemoveGuestButton(Parent waitlist) {
+        Button removeGuestButton = (Button) waitlist.lookup("#removeGuestButton");
         removeGuestButton.setOnAction(e -> partyRemover.removeParty());
     }
 
