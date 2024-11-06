@@ -1,4 +1,4 @@
-<h1>Restaurant Management System</h1>h1>
+<h1>Restaurant Management System</h1>
 <br>
 <h2>Kolby Alvey, Kevin Mack, Brian Raymond, Jason Yoder</h2>
 <br>
