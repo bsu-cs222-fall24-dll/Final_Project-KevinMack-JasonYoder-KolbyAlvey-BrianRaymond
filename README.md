@@ -1,6 +1,6 @@
-# Restaurant Management System
+<h1>Restaurant Management System</h1>h1>
 <br>
-##Kolby Alvey, Kevin Mack, Brian Raymond, Jason Yoder
+<h2>Kolby Alvey, Kevin Mack, Brian Raymond, Jason Yoder</h2>
 <br>
 Currently, this project is a simple waitlist for a restaurant with full functionality. Ignore the buttons titled "tables" and "kitchen". Those are for future iterations.
 To come: Host system with dining room layout and back-of-the-house management menus.
