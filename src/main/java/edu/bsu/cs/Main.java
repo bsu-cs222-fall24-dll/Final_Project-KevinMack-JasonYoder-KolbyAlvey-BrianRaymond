@@ -95,31 +95,22 @@ public class Main extends Application {
     }
 
     private void setupTables() {
-        Button TableOne = (Button) tables.lookup("#t1");
-        TableOne.setOnAction(e -> TableInfo.ChangeState(1));
-        Button TableTwo = (Button) tables.lookup("#t2");
-        TableTwo.setOnAction(e -> TableInfo.ChangeState(2));
-        Button TableThree = (Button) tables.lookup("#t3");
-        TableThree.setOnAction(e -> TableInfo.ChangeState(3));
-        Button TableFour = (Button) tables.lookup("#t4");
-        TableFour.setOnAction(e -> TableInfo.ChangeState(4));
-        Button TableFive = (Button) tables.lookup("#t5");
-        TableFive.setOnAction(e -> TableInfo.ChangeState(5));
-        Button TableSix = (Button) tables.lookup("#t6");
-        TableSix.setOnAction(e -> TableInfo.ChangeState(6));
-        Button TableSeven = (Button) tables.lookup("#t7");
-        TableSeven.setOnAction(e -> TableInfo.ChangeState(7));
-        Button TableEight = (Button) tables.lookup("#t8");
-        TableEight.setOnAction(e -> TableInfo.ChangeState(8));
-        Button TableNine = (Button) tables.lookup("#t9");
-        TableNine.setOnAction(e -> TableInfo.ChangeState(9));
-        Button TableTen = (Button) tables.lookup("#t10");
-        TableTen.setOnAction(e -> TableInfo.ChangeState(10));
-        Button TableEleven = (Button) tables.lookup("#t11");
-        TableEleven.setOnAction(e -> TableInfo.ChangeState(11));
-        Button TableTwelve = (Button) tables.lookup("#t12");
-        TableTwelve.setOnAction(e -> TableInfo.ChangeState(12));
+        setupTableButton(tables.lookup("#t1"), 1);
+        setupTableButton(tables.lookup("#t2"), 2);
+        setupTableButton(tables.lookup("#t3"), 3);
+        setupTableButton(tables.lookup("#t4"), 4);
+        setupTableButton(tables.lookup("#t5"), 5);
+        setupTableButton(tables.lookup("#t6"), 6);
+        setupTableButton(tables.lookup("#t7"), 7);
+        setupTableButton(tables.lookup("#t8"), 8);
+        setupTableButton(tables.lookup("#t9"), 9);
+        setupTableButton(tables.lookup("#t10"), 10);
+        setupTableButton(tables.lookup("#t11"), 11);
+        setupTableButton(tables.lookup("#t12"), 12);
     }
 
+    private void setupTableButton(Object tableButton, int tableNumber) {
+        Button button = (Button) tableButton;
+        button.setOnAction(e -> TableInfo.ChangeState(tableNumber, button));
+    }
 }
-
