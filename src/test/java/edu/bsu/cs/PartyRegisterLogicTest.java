@@ -42,6 +42,36 @@ public class PartyRegisterLogicTest {
     }
 
     @Test
+    public void testIsInboundNumberInRange() {
+        assertFalse(partyRegisterLogic.isNotInboundInteger(50));
+    }
+
+    @Test
+    public void testIsInboundNumberOnBorder() {
+        assertFalse(partyRegisterLogic.isNotInboundInteger(75));
+    }
+
+    @Test
+    public void testIsInboundNumberOutOfRange() {
+        assertTrue(partyRegisterLogic.isNotInboundInteger(100));
+    }
+
+    @Test
+    public void testIsRealNumberNotRealNumber() {
+        assertFalse(partyRegisterLogic.isNotRealNumber("45"));
+    }
+
+    @Test
+    public void testIsNotRealNumberString() {
+        assertTrue(partyRegisterLogic.isNotRealNumber("hello"));
+    }
+
+    @Test
+    public void testIsNotRealNumberCharacters() {
+        assertTrue(partyRegisterLogic.isNotRealNumber("!@$&%(#)_"));
+    }
+
+    @Test
     public void testAddPartyToData() {
         SingletonDataStore dataStore = SingletonDataStore.getInstance();
         assertEquals(0, dataStore.getPartyList().size());

@@ -27,7 +27,6 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("MainScene.fxml")));
         StackPane screens = (StackPane) root.lookup("#contentStack");
 
-
         waitlist = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("WaitlistScreen.fxml")));
         VBox partyListVBox = (VBox) waitlist.lookup("#partyListVBox");
 

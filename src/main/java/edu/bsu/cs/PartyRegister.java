@@ -52,16 +52,19 @@ public class PartyRegister extends PartyHBoxBuilder {
         Button addButton = new Button("Add");
 
         addButton.setOnAction(e -> {
-            if(registerLogic.isValidPhoneNumber(phoneField.getText())) {
+            if(!registerLogic.isValidPhoneNumber(phoneField.getText())) {
+                showPhoneNumberAlert();
+            } else if (registerLogic.isNotRealNumber(sizeField.getText()) || registerLogic.isNotRealNumber(waitTimeField.getText())) {
+                showInvalidCharacterAlert();
+            } else if(registerLogic.isNotInboundInteger(Integer.parseInt(sizeField.getText())) || registerLogic.isNotInboundInteger(Integer.parseInt(waitTimeField.getText()))) {
+                showOutOfBoundsIntegerAlert();
+            } else {
                 addParty(
                         Integer.parseInt(sizeField.getText()),
                         nameField.getText(), phoneField.getText(),
                         Integer.parseInt(waitTimeField.getText())
                 );
-
                 dialog.close();
-            } else {
-                showPhoneNumberAlert();
             }
         });
 
@@ -86,7 +89,23 @@ public class PartyRegister extends PartyHBoxBuilder {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Invalid Phone Number");
         alert.setHeaderText(null);
-        alert.setContentText("Phone number must be left blank or 10 digits long");
+        alert.setContentText("Phone number must be left blank or 10 digits long.");
+        alert.showAndWait();
+    }
+
+    private void showOutOfBoundsIntegerAlert() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Number entered too large");
+        alert.setHeaderText(null);
+        alert.setContentText("No numbers larger than 75 are allowed.");
+        alert.showAndWait();
+    }
+
+    private void showInvalidCharacterAlert() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Invalid Character");
+        alert.setHeaderText(null);
+        alert.setContentText("Only digits are allowed.");
         alert.showAndWait();
     }
 

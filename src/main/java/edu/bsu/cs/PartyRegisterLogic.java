@@ -26,6 +26,19 @@ public class PartyRegisterLogic {
         return cleanPhoneNumber.isEmpty() || cleanPhoneNumber.length() == 10;
     }
 
+    public boolean isNotInboundInteger(int number) {
+        return number > 75;
+    }
+
+    public boolean isNotRealNumber(String textBoxValue) {
+        try {
+            Integer.parseInt(textBoxValue);
+            return false;
+        } catch (NumberFormatException e) {
+            return true;
+        }
+    }
+
     public void addPartyToData(int size, String name, String phoneNumber, int waitTime) {
         Party party = new Party(size, name, phoneNumber, waitTime);
         partyList.add(party);
