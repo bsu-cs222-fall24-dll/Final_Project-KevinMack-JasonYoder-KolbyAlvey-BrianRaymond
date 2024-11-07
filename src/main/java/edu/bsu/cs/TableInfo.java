@@ -19,7 +19,7 @@ public class TableInfo {
             if (selected.equals("Empty")) {
                 button.setStyle("-fx-background-color: green; -fx-background-radius: 65; -fx-pref-width: 130; -fx-pref-height: 130;");
             } else if (selected.equals("In Use")) {
-                button.setStyle("-fx-background-color: red; -fx-background-radius: 65; -fx-pref-width: 130; -fx-pref-height: 130;");
+                button.setStyle("-fx-background-color: #CF0000; -fx-background-radius: 65; -fx-pref-width: 130; -fx-pref-height: 130;");
             }
 
             System.out.println("Table Number " + tableNumber + " is now " + TableState[tableNumber - 1]);
