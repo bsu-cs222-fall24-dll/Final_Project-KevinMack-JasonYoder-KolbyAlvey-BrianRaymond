@@ -2,8 +2,6 @@ package edu.bsu.cs;
 
 import javafx.scene.control.ChoiceDialog;
 
-import java.util.HashMap;
-
 public class TableInfo {
 
     static String[] TableState = {"Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"};
