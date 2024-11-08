@@ -46,6 +46,7 @@ public class Main extends Application {
         kitchenListener(root);
 
         mainStage.setScene(new Scene(root));
+        mainStage.setResizable(false);
         mainStage.show();
 
         setupTables();
@@ -111,6 +112,6 @@ public class Main extends Application {
 
     private void setupTableButton(Object tableButton, int tableNumber) {
         Button button = (Button) tableButton;
-        button.setOnAction(e -> TableInfo.ChangeState(tableNumber, button));
+        button.setOnAction(e -> TablesLogic.ChangeState(tableNumber, button));
     }
 }

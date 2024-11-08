@@ -3,7 +3,7 @@ package edu.bsu.cs;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
 
-public class TableInfo {
+public class TablesLogic {
     static String[] TableState = {"Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"};
 
     public static void ChangeState(int tableNumber, Button button) {
