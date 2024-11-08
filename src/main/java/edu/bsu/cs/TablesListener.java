@@ -5,8 +5,10 @@ import javafx.scene.control.Button;
 public class TablesListener {
 
     public void setButtonListener(String tableType, Button referenceButton) {
-        referenceButton.setOnAction(e-> {findChangeMethod(tableType, referenceButton);
-            referenceButton.getParent().requestFocus();});
+        referenceButton.setOnAction(e-> {
+            findChangeMethod(tableType, referenceButton);
+            e.consume();
+        });
     }
 
     private void findChangeMethod(String tableType, Button referenceButton) {
