@@ -23,10 +23,32 @@ public class ButtonManager {
     }
 
     public void setupTableButtons(Parent tables) {
-        for (int i = 1; i <= 12; i++) {
+        TablesListener listener = new TablesListener();
+
+        for (int i = 1; i < 4; i++) {
             Button tableButton = (Button) tables.lookup("#t" + i);
-            int tableNumber = i;
-            tableButton.setOnAction(e -> TablesLogic.ChangeState(tableNumber, tableButton));
+            String tableType = "round";
+            tableButton.setOnAction(e -> listener.setButtonListener(tableType, tableButton));
+            tableButton.setFocusTraversable(false);
         }
+
+        for (int i = 4; i < 9; i++) {
+            Button tableButton = (Button) tables.lookup("#t" + i);
+            String tableType = "square";
+            tableButton.setOnAction(e -> listener.setButtonListener(tableType, tableButton));
+            tableButton.setFocusTraversable(false);
+        }
+
+        for (int i = 9; i < 12; i++) {
+            Button tableButton = (Button) tables.lookup("#t" + i);
+            String tableType = "booth";
+            tableButton.setOnAction(e -> listener.setButtonListener(tableType, tableButton));
+            tableButton.setFocusTraversable(false);
+        }
+
+        Button tableButton = (Button) tables.lookup("#t12");
+        String tableType = "long";
+        tableButton.setOnAction(e -> listener.setButtonListener(tableType, tableButton));
+        tableButton.setFocusTraversable(false);
     }
 }
