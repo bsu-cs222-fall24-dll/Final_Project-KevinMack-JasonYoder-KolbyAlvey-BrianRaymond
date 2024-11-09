@@ -48,7 +48,7 @@ public class ButtonManager {
         TABLE_TYPES.forEach((tableId, tableType) -> {
             Button tableButton = (Button) tables.lookup("#t" + tableId);
             if (tableButton != null) {
-                tableButton.setOnAction(e -> listener.toggleTableState(tableType, tableButton));
+                tableButton.setOnAction(e -> listener.toggleTableState(tableId, tableType, tableButton, tables));
                 tableButton.setFocusTraversable(false);
             }
         });

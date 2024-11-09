@@ -65,3 +65,11 @@
     -fx-border-width: 13;
     -fx-border-color: #000000;
 }
+
+.timer {
+    -fx-background-color: null;
+    -fx-border-color: null;
+    -fx-font-size: 14;
+    -fx-font-color: black;
+
+}
