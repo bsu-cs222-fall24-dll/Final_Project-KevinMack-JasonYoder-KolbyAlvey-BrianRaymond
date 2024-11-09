@@ -34,7 +34,7 @@
     -fx-border-color: #000000;
 }
 
-.open-booth {
+.open-booth-table {
     -fx-pref-width: 130;
     -fx-pref-height: 142;
     -fx-background-color: green;
@@ -42,7 +42,7 @@
     -fx-border-color: #000000;
 }
 
-.occupied-booth {
+.occupied-booth-table {
     -fx-pref-width: 130;
     -fx-pref-height: 142;
     -fx-background-color: #CF0000;

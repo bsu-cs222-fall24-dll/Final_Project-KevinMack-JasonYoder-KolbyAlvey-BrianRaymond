@@ -48,17 +48,17 @@
          <Font size="19.0" />
       </font>
    </Button>
-   <Button id="t9" layoutX="79.0" layoutY="454.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="130.0" styleClass="open-booth" text="9">
+   <Button id="t9" layoutX="79.0" layoutY="454.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="130.0" styleClass="open-booth-table" text="9">
       <font>
          <Font size="19.0" />
       </font>
    </Button>
-   <Button id="t10" layoutX="220.0" layoutY="454.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="130.0" styleClass="open-booth" text="10">
+   <Button id="t10" layoutX="220.0" layoutY="454.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="130.0" styleClass="open-booth-table" text="10">
       <font>
          <Font size="19.0" />
       </font>
    </Button>
-   <Button id="t11" layoutX="362.0" layoutY="454.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="130.0" styleClass="open-booth" text="11">
+   <Button id="t11" layoutX="362.0" layoutY="454.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="130.0" styleClass="open-booth-table" text="11">
       <font>
          <Font size="19.0" />
       </font>
