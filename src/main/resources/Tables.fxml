@@ -4,65 +4,65 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane id="0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="630.0" minWidth="940.0" prefHeight="630.0" prefWidth="940.0" xmlns="http://javafx.com/javafx/23.0.1">
+<Pane id="0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="630.0" minWidth="940.0" prefHeight="630.0" prefWidth="940.0" stylesheets="@TableStyles.css" xmlns="http://javafx.com/javafx/23.0.1" >
 
 
-      <Button id="t1" layoutX="104.0" layoutY="49.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="67.0" style="-fx-background-radius: 65; -fx-pref-width: 130; -fx-pref-height: 130; -fx-background-color: green; -fx-border-radius: 65; -fx-border-width: 13; -fx-border-color: #000000;" text="1">
+      <Button id="t1" layoutX="104.0" layoutY="49.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="67.0" styleClass="open-round-table" text="1">
             <font>
                   <Font size="19.0" />
             </font>
       </Button>
-   <Button id="t4" layoutX="104.0" layoutY="251.0" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: green; -fx-border-color: #000000; -fx-border-width: 13;" text="4">
+   <Button id="t4" layoutX="104.0" layoutY="251.0" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0"  styleClass="open-square-table" text="4">
       <font>
          <Font size="19.0" />
       </font>
    </Button>
-   <Button id="t2" layoutX="297.0" layoutY="49.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="67.0" style="-fx-background-radius: 65; -fx-pref-width: 130; -fx-pref-height: 130; -fx-background-color: green; -fx-border-radius: 65; -fx-border-width: 13; -fx-border-color: #000000;" text="2">
+   <Button id="t2" layoutX="297.0" layoutY="49.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="67.0" styleClass="open-round-table" text="2">
       <font>
          <Font size="19.0" />
       </font>
    </Button>
-   <Button id="t3" layoutX="491.0" layoutY="49.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="67.0" style="-fx-background-radius: 65; -fx-pref-width: 130; -fx-pref-height: 130; -fx-background-color: green; -fx-border-radius: 65; -fx-border-color: #000000; -fx-border-width: 13;" text="3">
+   <Button id="t3" layoutX="491.0" layoutY="49.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="67.0"  styleClass="open-round-table" text="3">
       <font>
          <Font size="19.0" />
       </font>
    </Button>
-   <Button id="t5" layoutX="297.0" layoutY="250.0" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: green; -fx-border-color: #000000; -fx-border-width: 13;" text="5">
+   <Button id="t5" layoutX="297.0" layoutY="250.0" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0"  styleClass="open-square-table" text="5">
       <font>
          <Font size="19.0" />
       </font>
    </Button>
-   <Button id="t6" layoutX="491.0" layoutY="251.0" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: green; -fx-border-color: #000000; -fx-border-width: 13;" text="6">
+   <Button id="t6" layoutX="491.0" layoutY="251.0" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0"  styleClass="open-square-table" text="6">
       <font>
          <Font size="19.0" />
       </font>
    </Button>
-   <Button id="t7" layoutX="758.0" layoutY="49.0" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: green; -fx-border-color: #000000; -fx-border-width: 13;" text="7">
+   <Button id="t7" layoutX="758.0" layoutY="49.0" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" styleClass="open-square-table" text="7">
       <font>
          <Font size="19.0" />
       </font>
    </Button>
-   <Button id="t8" layoutX="758.0" layoutY="250.0" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: green; -fx-border-color: #000000; -fx-border-width: 13;" text="8">
+   <Button id="t8" layoutX="758.0" layoutY="250.0" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0"  styleClass="open-square-table" text="8">
       <font>
          <Font size="19.0" />
       </font>
    </Button>
-   <Button id="t9" layoutX="79.0" layoutY="454.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="130.0" style="-fx-background-color: green; -fx-border-color: #000000; -fx-border-width: 13;" text="9">
+   <Button id="t9" layoutX="79.0" layoutY="454.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="130.0" styleClass="open-booth" text="9">
       <font>
          <Font size="19.0" />
       </font>
    </Button>
-   <Button id="t10" layoutX="220.0" layoutY="454.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="130.0" style="-fx-background-color: green; -fx-border-color: #000000; -fx-border-width: 13;" text="10">
+   <Button id="t10" layoutX="220.0" layoutY="454.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="130.0" styleClass="open-booth" text="10">
       <font>
          <Font size="19.0" />
       </font>
    </Button>
-   <Button id="t11" layoutX="362.0" layoutY="454.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="130.0" style="-fx-background-color: green; -fx-border-color: #000000; -fx-border-width: 13;" text="11">
+   <Button id="t11" layoutX="362.0" layoutY="454.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="130.0"  styleClass="open-booth" text="11">
       <font>
          <Font size="19.0" />
       </font>
    </Button>
-   <Button id="t12" layoutX="568.0" layoutY="460.0" mnemonicParsing="false" prefHeight="130.0" prefWidth="320.0" style="-fx-background-color: green; -fx-border-color: #000000; -fx-border-width: 13;" text="12">
+   <Button id="t12" layoutX="568.0" layoutY="460.0" mnemonicParsing="false" prefHeight="130.0" prefWidth="320.0" styleClass="open-long-table" text="12">
       <font>
          <Font size="19.0" />
       </font>

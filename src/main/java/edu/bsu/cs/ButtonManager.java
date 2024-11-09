@@ -3,9 +3,29 @@ package edu.bsu.cs;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ButtonManager {
     private final PartyRegister partyRegister;
     private final PartyRemover partyRemover;
+
+    private static final Map<Integer, String> TABLE_TYPES = new HashMap<>();
+
+    static {
+        TABLE_TYPES.put(1, "round");
+        TABLE_TYPES.put(2, "round");
+        TABLE_TYPES.put(3, "round");
+        TABLE_TYPES.put(4, "square");
+        TABLE_TYPES.put(5, "square");
+        TABLE_TYPES.put(6, "square");
+        TABLE_TYPES.put(7, "square");
+        TABLE_TYPES.put(8, "square");
+        TABLE_TYPES.put(9, "booth");
+        TABLE_TYPES.put(10, "booth");
+        TABLE_TYPES.put(11, "booth");
+        TABLE_TYPES.put(12, "long");
+    }
 
     public ButtonManager(PartyRegister partyRegister, PartyRemover partyRemover) {
         this.partyRegister = partyRegister;
@@ -25,30 +45,12 @@ public class ButtonManager {
     public void setupTableButtons(Parent tables) {
         TablesListener listener = new TablesListener();
 
-        for (int i = 1; i < 4; i++) {
-            Button tableButton = (Button) tables.lookup("#t" + i);
-            String tableType = "round";
-            tableButton.setOnAction(e -> listener.setButtonListener(tableType, tableButton));
-            tableButton.setFocusTraversable(false);
-        }
-
-        for (int i = 4; i < 9; i++) {
-            Button tableButton = (Button) tables.lookup("#t" + i);
-            String tableType = "square";
-            tableButton.setOnAction(e -> listener.setButtonListener(tableType, tableButton));
-            tableButton.setFocusTraversable(false);
-        }
-
-        for (int i = 9; i < 12; i++) {
-            Button tableButton = (Button) tables.lookup("#t" + i);
-            String tableType = "booth";
-            tableButton.setOnAction(e -> listener.setButtonListener(tableType, tableButton));
-            tableButton.setFocusTraversable(false);
-        }
-
-        Button tableButton = (Button) tables.lookup("#t12");
-        String tableType = "long";
-        tableButton.setOnAction(e -> listener.setButtonListener(tableType, tableButton));
-        tableButton.setFocusTraversable(false);
+        TABLE_TYPES.forEach((tableId, tableType) -> {
+            Button tableButton = (Button) tables.lookup("#t" + tableId);
+            if (tableButton != null) {
+                tableButton.setOnAction(e -> listener.toggleTableState(tableType, tableButton));
+                tableButton.setFocusTraversable(false);
+            }
+        });
     }
 }

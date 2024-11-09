@@ -4,103 +4,16 @@ import javafx.scene.control.Button;
 
 public class TablesListener {
 
-    public void setButtonListener(String tableType, Button referenceButton) {
-        referenceButton.setOnAction(e-> {
-            findChangeMethod(tableType, referenceButton);
-            e.consume();
-        });
-    }
+    public void toggleTableState(String tableType, Button tableButton) {
+        String openClass = "open-" + tableType + "-table";
+        String occupiedClass = "occupied-" + tableType + "-table";
 
-    private void findChangeMethod(String tableType, Button referenceButton) {
-        switch (tableType) {
-            case "round" -> changeRoundTable(referenceButton);
-            case "square" -> changeSquareTable(referenceButton);
-            case "booth" -> changeBooth(referenceButton);
-            default -> changeLongTable(referenceButton);
-        }
-
-    }
-
-    private void changeRoundTable(Button referenceButton) {
-        if (referenceButton.getStyle().contains("green")) {
-            referenceButton.setStyle("""
-                        -fx-background-radius: 65;
-                        -fx-pref-width: 130;
-                        -fx-pref-height: 130;
-                        -fx-background-color: #CF0000;
-                        -fx-border-radius: 65;
-                        -fx-border-width: 13;
-                        -fx-border-color: #000000;
-                        """);
+        if (tableButton.getStyleClass().contains(openClass)) {
+            tableButton.getStyleClass().remove(openClass);
+            tableButton.getStyleClass().add(occupiedClass);
         } else {
-            referenceButton.setStyle("""
-                        -fx-background-radius: 65;
-                        -fx-pref-width: 130;
-                        -fx-pref-height: 130;
-                        -fx-background-color: green;
-                        -fx-border-radius: 65;
-                        -fx-border-width: 13;
-                        -fx-border-color: #000000;
-                        """);
-        }
-    }
-
-    private void changeSquareTable(Button referenceButton) {
-        if (referenceButton.getStyle().contains("green")) {
-            referenceButton.setStyle("""
-                        -fx-pref-width: 130;
-                        -fx-pref-height: 130;
-                        -fx-background-color: #CF0000;
-                        -fx-border-width: 13;
-                        -fx-border-color: #000000;
-                        """);
-        } else {
-            referenceButton.setStyle("""
-                        -fx-pref-width: 130;
-                        -fx-pref-height: 130;
-                        -fx-background-color: green;
-                        -fx-border-width: 13;
-                        -fx-border-color: #000000;
-                        """);
-        }
-    }
-    private void changeBooth(Button referenceButton) {
-        if (referenceButton.getStyle().contains("green")) {
-            referenceButton.setStyle("""
-                    -fx-pref-width: 130;
-                    -fx-pref-height: 142;
-                    -fx-background-color: #CF0000;
-                    -fx-border-width: 13;
-                    -fx-border-color: #000000;
-                    """);
-        } else {
-            referenceButton.setStyle("""
-                    -fx-pref-width: 130;
-                    -fx-pref-height: 142;
-                    -fx-background-color: green;
-                    -fx-border-width: 13;
-                    -fx-border-color: #000000;
-                    """);
-        }
-    }
-
-    private void changeLongTable(Button referenceButton) {
-        if (referenceButton.getStyle().contains("green")) {
-            referenceButton.setStyle("""
-                       -fx-pref-width: 320;
-                       -fx-pref-height: 130;
-                       -fx-background-color: #CF0000;
-                       -fx-border-width: 13;
-                       -fx-border-color: #000000;
-                       """);
-        } else {
-            referenceButton.setStyle("""
-                            -fx-pref-width: 320;
-                            -fx-pref-height: 130;
-                            -fx-background-color: green;
-                            -fx-border-width: 13;
-                            -fx-border-color: #000000;
-                            """);
+            tableButton.getStyleClass().remove(occupiedClass);
+            tableButton.getStyleClass().add(openClass);
         }
     }
 }
