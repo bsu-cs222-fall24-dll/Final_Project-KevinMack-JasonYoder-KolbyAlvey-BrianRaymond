@@ -1,5 +1,6 @@
 package edu.bsu.cs;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -35,5 +36,10 @@ public class PartyTest {
                 () -> assertEquals("317-234-4321", party.getPhoneNumber()),
                 () -> assertEquals(30, party.getWaitTime())
         );
+    }
+
+    @AfterEach
+    void resetCount() {
+        Party.resetCounter();
     }
 }

@@ -27,7 +27,7 @@ class PhonebookTest {
 
     @Test
     void testLoadPhoneBook() {
-        assertEquals("kevin ", phonebook.getNameByPhoneNumber("3177375487"));
+        assertEquals("kevin", phonebook.getNameByPhoneNumber("3177375487"));
         assertEquals("Brian", phonebook.getNameByPhoneNumber("3177245960"));
     }
 
@@ -53,7 +53,9 @@ class PhonebookTest {
         phonebook.addNewEntry(newPhoneNumber, newName);
 
         List<String> lines = Files.readAllLines(Paths.get(csvFilePath));
-        assertTrue(lines.contains(newPhoneNumber + "," + newName));
+        System.out.println("File contents after adding entry: " + lines);
+
+        assertTrue(lines.contains(newPhoneNumber + "," + newName), "The CSV file should contain the new entry.");
     }
 
     @AfterEach

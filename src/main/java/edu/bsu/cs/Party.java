@@ -1,7 +1,7 @@
 package edu.bsu.cs;
 
 public class Party {
-    private static int idCounter = 0; // Static counter to generate unique IDs
+    private static int idCounter = 0;
     private final int id;
     private final int size;
     private final String name;
@@ -9,7 +9,7 @@ public class Party {
     private final int waitTime;
 
     public Party(int size, String name, String phoneNumber, int waitTime) {
-        this.id = ++idCounter; // Increment counter and assign ID
+        this.id = ++idCounter;
         this.size = size;
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -34,5 +34,9 @@ public class Party {
 
     public int getWaitTime() {
         return waitTime;
+    }
+
+    public static void resetCounter() {
+        idCounter = 0;
     }
 }
