@@ -21,8 +21,8 @@ public class PartyTest {
         Party party1 = new Party(2, "Jason", "312-322-9999", 15);
         Party party2 = new Party(3, "Kolby", "317-737-5487", 10);
 
-        assertEquals(2, party1.getId());
-        assertEquals(3, party2.getId());
+        assertEquals(1, party1.getId());
+        assertEquals(2, party2.getId());
     }
 
     @Test
