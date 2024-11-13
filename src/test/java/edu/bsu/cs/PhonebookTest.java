@@ -1,9 +1,7 @@
 package edu.bsu.cs;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -16,13 +14,11 @@ class PhonebookTest {
     private final String csvFilePath = "testPhonebook.csv";
 
     @BeforeEach
-    void setUp() throws IOException {
-        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(csvFilePath))) {
-            writer.write("3177375487,kevin\n");
-            writer.write("3177245960,Brian\n");
-        }
-
+    void setUp()  {
         phonebook = new Phonebook(csvFilePath);
+        phonebook.addNewEntry("3177375487", "kevin");
+        phonebook.addNewEntry("3177245960", "Brian");
+
     }
 
     @Test
@@ -56,10 +52,5 @@ class PhonebookTest {
         System.out.println("File contents after adding entry: " + lines);
 
         assertTrue(lines.contains(newPhoneNumber + "," + newName), "The CSV file should contain the new entry.");
-    }
-
-    @AfterEach
-    void tearDown() throws IOException {
-        Files.deleteIfExists(Paths.get(csvFilePath));
     }
 }
