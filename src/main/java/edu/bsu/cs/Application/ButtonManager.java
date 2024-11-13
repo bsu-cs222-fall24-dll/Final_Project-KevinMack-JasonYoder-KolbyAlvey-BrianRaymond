@@ -1,4 +1,4 @@
-package edu.bsu.cs;
+package edu.bsu.cs.Application;
 
 import javafx.scene.Parent;
 import javafx.scene.control.Button;

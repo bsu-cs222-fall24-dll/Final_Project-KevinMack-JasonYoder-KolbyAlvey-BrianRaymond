@@ -1,5 +1,6 @@
-package edu.bsu.cs;
+package edu.bsu.cs.Application;
 
+import edu.bsu.cs.Party;
 import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;

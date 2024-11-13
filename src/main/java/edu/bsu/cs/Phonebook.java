@@ -16,13 +16,16 @@ public class Phonebook {
     }
 
     private void loadPhoneBook() {
-        try (BufferedReader br = Files.newBufferedReader(Paths.get(csvFilePath))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] fields = line.split(",");
-                String phoneNumber = fields[0].trim();
-                String name = fields[1].trim();
-                phonebook.put(phoneNumber, name);
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(csvFilePath)) {
+            assert inputStream != null;
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    String[] fields = line.split(",");
+                    String phoneNumber = fields[0].trim();
+                    String name = fields[1].trim();
+                    phonebook.put(phoneNumber, name);
+                }
             }
         } catch (IOException e) {
             System.err.println("An error occurred loading the phonebook: " + e.getMessage());

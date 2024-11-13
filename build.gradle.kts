@@ -29,7 +29,7 @@ javafx {
 }
 
 application {
-    mainClass.set("edu.bsu.cs.Main")
+    mainClass.set("edu.bsu.cs.Application.Main")
 }
 
 tasks.withType<JavaExec> {
