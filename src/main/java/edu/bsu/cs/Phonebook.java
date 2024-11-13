@@ -1,9 +1,6 @@
 package edu.bsu.cs;
 
 
-import com.opencsv.CSVWriter;
-import com.opencsv.ICSVWriter;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
