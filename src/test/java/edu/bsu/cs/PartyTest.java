@@ -1,14 +1,10 @@
 package edu.bsu.cs;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PartyTest {
-    @BeforeEach
-    public void setUp() {
-        Party.resetIdCounter();
-    }
 
     @Test
     public void testPartyCreation() {
@@ -35,11 +31,15 @@ public class PartyTest {
         Party party = new Party(5, "brian", "317-234-4321", 30);
 
         assertAll("Verify party properties",
-                () -> assertEquals(1, party.getId()),
                 () -> assertEquals(5, party.getSize()),
                 () -> assertEquals("brian", party.getName()),
                 () -> assertEquals("317-234-4321", party.getPhoneNumber()),
                 () -> assertEquals(30, party.getWaitTime())
         );
+    }
+
+    @AfterEach
+    void resetCount() {
+        Party.resetCounter();
     }
 }

@@ -1,5 +1,9 @@
-package edu.bsu.cs;
+package edu.bsu.cs.Application;
 
+import edu.bsu.cs.Party;
+import edu.bsu.cs.PartyRegisterLogic;
+import edu.bsu.cs.Phonebook;
+import edu.bsu.cs.SingletonDataStore;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
