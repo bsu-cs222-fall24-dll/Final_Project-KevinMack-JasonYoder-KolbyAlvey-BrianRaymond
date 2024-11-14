@@ -16,6 +16,10 @@ public class Party {
         this.waitTime = waitTime;
     }
 
+    public static void resetIdCounter() {
+        idCounter = 0;
+    }
+
     public int getId() {
         return id;
     }
