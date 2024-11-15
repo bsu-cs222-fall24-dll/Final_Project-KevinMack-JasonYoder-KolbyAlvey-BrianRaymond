@@ -14,6 +14,7 @@ repositories {
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation("org.openjfx:javafx-controls:23.0.1")
     implementation("org.openjfx:javafx-fxml:23.0.1")
     implementation("com.opencsv:opencsv:5.7.1")
@@ -32,6 +33,3 @@ application {
     mainClass.set("edu.bsu.cs.Application.Main")
 }
 
-tasks.withType<JavaExec> {
-    standardInput = System.`in`
-}
