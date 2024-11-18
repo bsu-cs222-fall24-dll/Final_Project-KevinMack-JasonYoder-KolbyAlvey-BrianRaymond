@@ -26,7 +26,7 @@ public class AddOrderController {
 
     private KitchenController kitchenController;
 
-    private List<String> menuItems = List.of(
+    private final List<String> menuItems = List.of(
             "Hamburger", "Cheeseburger", "Hot Dog", "Chili Dog", "Ham and Cheese Sliders",
             "Nachos", "French Fries", "Cheese Curds", "Pretzel Bites", "Curly Fries",
             "Coke", "Sprite", "Water", "Root beer", "Lemonade"
@@ -34,8 +34,10 @@ public class AddOrderController {
 
     @FXML
     public void initialize() {
+
         menuList.getItems().addAll(menuItems);
         menuList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
 
         submitOrderButton.setOnAction(event -> submitOrder());
         cancelButton.setOnAction(event -> closePopup());
@@ -45,18 +47,56 @@ public class AddOrderController {
         this.kitchenController = controller;
     }
 
-    private void submitOrder() {
-        int tableNumber = Integer.parseInt(tableNumberField.getText());
-        List<String> selectedItems = new ArrayList<>(menuList.getSelectionModel().getSelectedItems());
-        String specialInstructions = specialInstructionsField.getText();
 
-        Order order = new Order(tableNumber, selectedItems, specialInstructions);
-        kitchenController.addOrder(order);
-        closePopup();
+    private void submitOrder() {
+        try {
+
+            String tableInput = tableNumberField.getText().trim();
+            if (tableInput.isEmpty()) {
+                showAlert("Invalid Input", "Table number is required.");
+                return;
+            }
+
+            int tableNumber = Integer.parseInt(tableInput);
+            if (tableNumber <= 0) {
+                showAlert("Invalid Input", "Table number must be greater than 0.");
+                return;
+            }
+
+
+            List<String> selectedItems = new ArrayList<>(menuList.getSelectionModel().getSelectedItems());
+            if (selectedItems.isEmpty()) {
+                showAlert("Invalid Input", "You must select at least one menu item.");
+                return;
+            }
+
+
+            String specialInstructions = specialInstructionsField.getText().trim();
+
+
+            Order order = new Order(tableNumber, selectedItems, specialInstructions);
+            kitchenController.addOrder(order);
+
+            closePopup();
+
+        } catch (NumberFormatException e) {
+            showAlert("Invalid Input", "Table number must be a valid number.");
+        } catch (Exception e) {
+            showAlert("Error", "An unexpected error occurred: " + e.getMessage());
+        }
     }
 
     private void closePopup() {
         Stage stage = (Stage) submitOrderButton.getScene().getWindow();
         stage.close();
+    }
+
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
