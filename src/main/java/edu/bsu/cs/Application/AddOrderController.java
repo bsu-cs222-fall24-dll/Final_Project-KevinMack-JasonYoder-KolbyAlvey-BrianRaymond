@@ -74,7 +74,7 @@ public class AddOrderController {
             String specialInstructions = specialInstructionsField.getText().trim();
 
 
-            Order order = new Order(tableNumber, selectedItems, specialInstructions);
+            Order order = new Order();
             kitchenController.addOrder(order);
 
             closePopup();
