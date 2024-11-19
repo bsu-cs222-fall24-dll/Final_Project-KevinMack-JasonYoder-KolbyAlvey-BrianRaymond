@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/23.0.1" >
+      <VBox prefHeight="547.0" prefWidth="178.0" style="-fx-border-color: #000000;">
+            <TextField alignment="CENTER" editable="false" prefHeight="59.0" prefWidth="178.0" text="Order">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </TextField>
+      </VBox>
+    <TabPane layoutX="178.0" prefHeight="547.0" prefWidth="493.0" style="-fx-border-color: #000000;"
+             tabClosingPolicy="UNAVAILABLE">
+        <Tab text="Entrees">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-border-color: #000000;"/>
+        </Tab>
+        <Tab text="Sides">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-border-color: #000000;"/>
+        </Tab>
+        <Tab text="Drinks">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-border-color: #000000;"/>
+        </Tab>
+    </TabPane>
+
+</Pane>
