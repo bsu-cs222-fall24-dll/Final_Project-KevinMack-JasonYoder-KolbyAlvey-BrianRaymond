@@ -12,8 +12,8 @@ public class AddOrder {
 
     public static void showAddOrder() {
         Stage orderStage = new Stage();
-        Parent addOrder = fetchFXMLFile();
-        Scene orderScreen = new Scene(addOrder);
+        Parent addOrderFXML = fetchFXMLFile();
+        Scene orderScreen = new Scene(addOrderFXML);
         orderScreen.getRoot().requestFocus();
         orderStage.setScene(orderScreen);
         orderStage.setResizable(false);
