@@ -76,5 +76,25 @@
          <Font size="14.0" />
       </font>
    </Button>
+   <Button id="fountainDrink" layoutX="215.0" layoutY="326.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="120.0" text="Fountain Drink">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </Button>
+   <Button id="lemonade" layoutX="369.0" layoutY="326.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="120.0" text="Lemonade">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </Button>
+   <Button id="water" layoutX="518.0" layoutY="326.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="120.0" text="Water">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </Button>
+   <TextField alignment="TOP_LEFT" layoutX="215.0" layoutY="405.0" prefHeight="103.0" prefWidth="422.0" promptText="Special Instructions...">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </TextField>
 
 </Pane>
