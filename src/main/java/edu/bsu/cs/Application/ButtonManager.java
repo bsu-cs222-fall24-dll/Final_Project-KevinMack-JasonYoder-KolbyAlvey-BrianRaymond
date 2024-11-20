@@ -53,4 +53,9 @@ public class ButtonManager {
             }
         });
     }
+
+    public void setupAddOrderButton(Parent kitchen) {
+        Button addOrderButton = (Button) kitchen.lookup("#addOrderButton");
+        addOrderButton.setOnAction(e -> AddOrder.showAddOrder());
+    }
 }
