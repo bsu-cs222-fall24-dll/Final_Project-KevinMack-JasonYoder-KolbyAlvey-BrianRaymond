@@ -2,6 +2,7 @@ package edu.bsu.cs.Application;
 
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -58,4 +59,12 @@ public class ButtonManager {
         Button addOrderButton = (Button) kitchen.lookup("#addOrderButton");
         addOrderButton.setOnAction(e -> AddOrder.showAddOrder());
     }
+
+    public void setupFoodButtons(Parent addOrder) {
+        Button cheeseburgerButton = (Button) addOrder.lookup("#cheeseburger");
+        TextArea orderBox = (TextArea) addOrder.lookup("#orderBox");
+        cheeseburgerButton.setOnAction(e -> orderBox.appendText("Cheeseburger\n"));
+    }
+
+
 }

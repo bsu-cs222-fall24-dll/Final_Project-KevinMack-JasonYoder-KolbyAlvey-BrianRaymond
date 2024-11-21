@@ -26,6 +26,7 @@ public class Main extends Application {
 
         Parent tables = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("Tables.fxml")));
         Parent kitchen = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("Kitchen.fxml")));
+        Parent addOrder = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("AddOrder.fxml")));
 
         screens.getChildren().addAll(waitlist, tables, kitchen);
 
@@ -38,6 +39,7 @@ public class Main extends Application {
         buttonManager.setupRemoveGuestButton(waitlist);
         buttonManager.setupTableButtons(tables);
         buttonManager.setupAddOrderButton(kitchen);
+        buttonManager.setupFoodButtons(addOrder);
 
         TabListener tabListener = new TabListener(screenManager);
         tabListener.setupWaitlistListener(root);
