@@ -1,8 +1,11 @@
 package edu.bsu.cs;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.io.*;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -14,11 +17,13 @@ class PhonebookTest {
     private final String csvFilePath = "testPhonebook.csv";
 
     @BeforeEach
-    void setUp()  {
-        phonebook = new Phonebook(csvFilePath);
-        phonebook.addNewEntry("3177375487", "kevin");
-        phonebook.addNewEntry("3177245960", "Brian");
+    void setUp() throws IOException {
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(csvFilePath))) {
+            writer.write("3177375487,kevin\n");
+            writer.write("3177245960,Brian\n");
+        }
 
+        phonebook = new Phonebook(csvFilePath);
     }
 
     @Test
@@ -49,8 +54,11 @@ class PhonebookTest {
         phonebook.addNewEntry(newPhoneNumber, newName);
 
         List<String> lines = Files.readAllLines(Paths.get(csvFilePath));
-        System.out.println("File contents after adding entry: " + lines);
+        assertFalse(lines.contains(newPhoneNumber + "," + newName));
+    }
 
-        assertTrue(lines.contains(newPhoneNumber + "," + newName), "The CSV file should contain the new entry.");
+    @AfterEach
+    void tearDown() throws IOException {
+        Files.deleteIfExists(Paths.get(csvFilePath));
     }
 }
