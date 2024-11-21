@@ -1,4 +1,4 @@
-package edu.bsu.cs;
+package edu.bsu.cs.Application;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
