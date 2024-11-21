@@ -9,12 +9,12 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/23.0.1" >
       <VBox prefHeight="547.0" prefWidth="186.0" style="-fx-border-color: #000000;">
-            <TextField alignment="CENTER" editable="false" prefHeight="59.0" prefWidth="178.0" text="Order">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-            </TextField>
-      <TextArea id="orderBox" prefHeight="431.0" prefWidth="185.0" />
+         <TextField alignment="CENTER" editable="false" prefHeight="59.0" prefWidth="178.0" text="Order">
+            <font>
+               <Font name="System Bold" size="20.0" />
+            </font>
+         </TextField>
+         <TextArea id="orderBox" prefHeight="431.0" prefWidth="185.0" />
       <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="190.0" text="Submit">
          <font>
             <Font size="25.0" />
