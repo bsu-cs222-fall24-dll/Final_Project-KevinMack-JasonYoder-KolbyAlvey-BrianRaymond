@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -38,12 +39,51 @@ public class AddOrder {
     }
 
     private static void setButtonActions(Parent orderScreen) {
-        TextArea orderList = (TextArea) orderScreen.lookup("#orderBox");
-        for (String item : MENUITEMS) {
-            Button button = new Button(item);
-            button.setOnAction(e -> orderList.appendText(item + "\n"));
-        }
+        TextArea orderBox = (TextArea) orderScreen.lookup("#orderBox");
+        TextField specialInstructionsField = (TextField) orderScreen.lookup("#specialInstructions");
+
+        Button cheeseburgerButton = (Button) orderScreen.lookup("#cheeseburger");
+        Button baconBurgerButton = (Button) orderScreen.lookup("#baconBurger");
+        Button hamAndCheeseButton = (Button) orderScreen.lookup("#hamAndCheese");
+        Button chickenSandwichButton = (Button) orderScreen.lookup("#chickenSandwich");
+        Button cobbSaladButton = (Button) orderScreen.lookup("#cobbSalad");
+        Button chickenTendersButton = (Button) orderScreen.lookup("#chickenTenders");
+        Button straightFriesButton = (Button) orderScreen.lookup("#straightFries");
+        Button curlyFriesButton = (Button) orderScreen.lookup("#curlyFries");
+        Button macNCheeseButton = (Button) orderScreen.lookup("#macNCheese");
+        Button sideSaladButton = (Button) orderScreen.lookup("#sideSalad");
+        Button fruitPlateButton = (Button) orderScreen.lookup("#fruitPlate");
+        Button applesauceButton = (Button) orderScreen.lookup("#applesauce");
+        Button fountainDrinkButton = (Button) orderScreen.lookup("#fountainDrink");
+        Button lemonadeButton = (Button) orderScreen.lookup("#lemonade");
+        Button waterButton = (Button) orderScreen.lookup("#water");
+
+        cheeseburgerButton.setOnAction(e -> appendToOrderBox("Cheeseburger", specialInstructionsField, orderBox));
+        baconBurgerButton.setOnAction(e -> appendToOrderBox("Bacon Burger", specialInstructionsField, orderBox));
+        hamAndCheeseButton.setOnAction(e -> appendToOrderBox("Ham and Cheese", specialInstructionsField, orderBox));
+        chickenSandwichButton.setOnAction(e -> appendToOrderBox("Chicken Sandwich", specialInstructionsField, orderBox));
+        cobbSaladButton.setOnAction(e -> appendToOrderBox("Cobb Salad", specialInstructionsField, orderBox));
+        chickenTendersButton.setOnAction(e -> appendToOrderBox("Chicken Tenders", specialInstructionsField, orderBox));
+        straightFriesButton.setOnAction(e -> appendToOrderBox("Straight Fries", specialInstructionsField, orderBox));
+        curlyFriesButton.setOnAction(e -> appendToOrderBox("Curly Fries", specialInstructionsField, orderBox));
+        macNCheeseButton.setOnAction(e -> appendToOrderBox("Mac n Cheese", specialInstructionsField, orderBox));
+        sideSaladButton.setOnAction(e -> appendToOrderBox("Side Salad", specialInstructionsField, orderBox));
+        fruitPlateButton.setOnAction(e -> appendToOrderBox("Fruit Plate", specialInstructionsField, orderBox));
+        applesauceButton.setOnAction(e -> appendToOrderBox("Applesauce", specialInstructionsField, orderBox));
+        fountainDrinkButton.setOnAction(e -> appendToOrderBox("Fountain Drink", specialInstructionsField, orderBox));
+        lemonadeButton.setOnAction(e -> appendToOrderBox("Lemonade", specialInstructionsField, orderBox));
+        waterButton.setOnAction(e -> appendToOrderBox("Water", specialInstructionsField, orderBox));
     }
+
+    private static void appendToOrderBox(String foodItem, TextField specialInstructionsField, TextArea orderBox) {
+        orderBox.appendText(foodItem + "\n");
+        String specialInstructions = specialInstructionsField.getText().trim();
+        if (!specialInstructions.isEmpty()) {
+            orderBox.appendText("--" + specialInstructions + "\n");
+        }
+        specialInstructionsField.clear();
+    }
+
 
 
 }
