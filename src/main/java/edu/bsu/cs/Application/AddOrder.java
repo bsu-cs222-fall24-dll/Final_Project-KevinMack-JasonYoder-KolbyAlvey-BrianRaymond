@@ -44,7 +44,7 @@ public class AddOrder {
 
         for (String item : MENUITEMS) {
             Button itemButton = (Button) orderScreen.lookup("#" + item);
-            itemButton.setOnAction(e -> appendToOrderBox(item, specialInstructionsField, orderBox));
+            itemButton.setOnAction(e -> appendToOrderBox(itemButton.getText(), specialInstructionsField, orderBox));
         }
     }
 
