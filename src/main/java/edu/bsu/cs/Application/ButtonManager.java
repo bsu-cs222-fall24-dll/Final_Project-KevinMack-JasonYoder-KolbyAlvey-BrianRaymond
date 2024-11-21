@@ -56,9 +56,9 @@ public class ButtonManager {
 
     public void setupAddOrderButton(Parent kitchen) {
         Button addOrderButton = (Button) kitchen.lookup("#addOrderButton");
-
+        AddOrder orderScreen = new AddOrder();
         if (addOrderButton != null) {
-            addOrderButton.setOnAction(e -> AddOrder.showAddOrder());
+            addOrderButton.setOnAction(e -> orderScreen.showAddOrder());
         } else {
             System.out.println("addOrderButton not found in Kitchen.fxml");
         }

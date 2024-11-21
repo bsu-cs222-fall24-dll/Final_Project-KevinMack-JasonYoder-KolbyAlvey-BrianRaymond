@@ -18,7 +18,7 @@ public class AddOrder {
             "Curly Fries", "Mac n Cheese", "Side Salad", "Fruit Plate", "Applesauce",
             "Fountain Drink", "Lemonade", "Water"};
 
-    public static void showAddOrder() {
+    public void showAddOrder() {
         Stage orderStage = new Stage();
         Parent addOrderFXML = fetchFXMLFile();
         Scene orderScreen = new Scene(addOrderFXML);
@@ -29,7 +29,7 @@ public class AddOrder {
         orderStage.show();
     }
 
-    private static Parent fetchFXMLFile() {
+    private Parent fetchFXMLFile() {
         try {
             return FXMLLoader.load(Objects.requireNonNull(AddOrder.class.getClassLoader().getResource("AddOrder.fxml")));
         } catch(IOException e) {
@@ -38,7 +38,7 @@ public class AddOrder {
         return null;
     }
 
-    private static void setButtonActions(Parent orderScreen) {
+    private void setButtonActions(Parent orderScreen) {
         TextArea orderBox = (TextArea) orderScreen.lookup("#orderBox");
         TextField specialInstructionsField = (TextField) orderScreen.lookup("#specialInstructions");
 
@@ -75,7 +75,7 @@ public class AddOrder {
         waterButton.setOnAction(e -> appendToOrderBox("Water", specialInstructionsField, orderBox));
     }
 
-    private static void appendToOrderBox(String foodItem, TextField specialInstructionsField, TextArea orderBox) {
+    private void appendToOrderBox(String foodItem, TextField specialInstructionsField, TextArea orderBox) {
         orderBox.appendText(foodItem + "\n");
         String specialInstructions = specialInstructionsField.getText().trim();
         if (!specialInstructions.isEmpty()) {
