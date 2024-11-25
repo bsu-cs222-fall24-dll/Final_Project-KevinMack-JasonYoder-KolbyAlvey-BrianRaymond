@@ -5,6 +5,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class Phonebook {
     private final HashMap<String, String> phonebook = new HashMap<>();
@@ -12,24 +13,26 @@ public class Phonebook {
 
     public Phonebook(String csvFilePath) {
         this.csvFilePath = csvFilePath;
-        loadPhoneBook();
+        loadPhoneBook(csvFilePath);
     }
 
-    private void loadPhoneBook() {
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(csvFilePath)) {
-            assert inputStream != null;
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
-                String line;
-                while ((line = br.readLine()) != null) {
-                    String[] fields = line.split(",");
-                    String phoneNumber = fields[0].trim();
-                    String name = fields[1].trim();
-                    phonebook.put(phoneNumber, name);
-                }
-            }
-        } catch (IOException e) {
-            System.err.println("An error occurred loading the phonebook: " + e.getMessage());
+    private void loadPhoneBook(String filePath) {
+
+        try {
+            readToHashMap(filePath);
+        } catch(FileNotFoundException e) {
+            System.err.println(e.getMessage());
         }
+    }
+
+    private void readToHashMap(String filePath) throws FileNotFoundException {
+        Scanner fileReader = new Scanner(new File(filePath));
+        while (fileReader.hasNext()) {
+            String line = fileReader.nextLine();
+            String[] nameNumberArray = line.split(",");
+            phonebook.put(nameNumberArray[0], nameNumberArray[1]);
+        }
+        fileReader.close();
     }
 
     public void addNewEntry(String phoneNumber, String name) {
