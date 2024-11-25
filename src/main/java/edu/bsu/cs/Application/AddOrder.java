@@ -1,14 +1,12 @@
 package edu.bsu.cs.Application;
 
-import javafx.fxml.FXMLLoader;
+import edu.bsu.cs.FetchFXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.util.Objects;
 
 public class AddOrder {
@@ -20,22 +18,13 @@ public class AddOrder {
 
     public void showAddOrder() {
         Stage orderStage = new Stage();
-        Parent addOrderFXML = fetchFXMLFile();
+        Parent addOrderFXML = FetchFXML.loadFXML("AddOrder.fxml");
         Scene orderScreen = new Scene(addOrderFXML);
         orderScreen.getRoot().requestFocus();
         setButtonActions(Objects.requireNonNull(addOrderFXML));
         orderStage.setScene(orderScreen);
         orderStage.setResizable(false);
         orderStage.show();
-    }
-
-    private Parent fetchFXMLFile() {
-        try {
-            return FXMLLoader.load(Objects.requireNonNull(AddOrder.class.getClassLoader().getResource("AddOrder.fxml")));
-        } catch(IOException e) {
-            System.err.println(e.getMessage());
-        }
-        return null;
     }
 
     private void setButtonActions(Parent orderScreen) {
@@ -46,6 +35,9 @@ public class AddOrder {
             Button itemButton = (Button) orderScreen.lookup("#" + item);
             itemButton.setOnAction(e -> appendToOrderBox(itemButton.getText(), specialInstructionsField, orderBox));
         }
+
+        Button submitButton = (Button) orderScreen.lookup("#submitOrderButton");
+        submitButton.setOnAction(e -> submitOrder(orderBox));
     }
 
     private void appendToOrderBox(String foodItem, TextField specialInstructionsField, TextArea orderBox) {
@@ -55,6 +47,11 @@ public class AddOrder {
             orderBox.appendText("--" + specialInstructions + "\n");
         }
         specialInstructionsField.clear();
+    }
+
+    private void submitOrder(TextArea orderBox) {
+        String order = orderBox.getText();
+        Parent newOrder = FetchFXML.loadFXML("BlankOrder.fxml");
     }
 
 
