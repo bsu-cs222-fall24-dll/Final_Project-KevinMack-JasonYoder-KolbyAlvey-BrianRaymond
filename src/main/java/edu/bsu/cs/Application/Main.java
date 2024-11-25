@@ -1,13 +1,12 @@
 package edu.bsu.cs.Application;
 
+import edu.bsu.cs.FetchFXML;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import java.io.IOException;
 import java.util.Objects;
 
 public class Main extends Application {
@@ -17,15 +16,15 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage mainStage) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("MainScene.fxml")));
-        StackPane screens = (StackPane) root.lookup("#contentStack");
+    public void start(Stage mainStage){
+        Parent root = FetchFXML.loadFXML("MainScene.fxml");
+        StackPane screens = (StackPane) Objects.requireNonNull(root).lookup("#contentStack");
 
-        Parent waitlist = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("WaitlistScreen.fxml")));
-        VBox partyListVBox = (VBox) waitlist.lookup("#partyListVBox");
+        Parent waitlist = FetchFXML.loadFXML("WaitlistScreen.fxml");
+        VBox partyListVBox = (VBox) Objects.requireNonNull(waitlist).lookup("#partyListVBox");
 
-        Parent tables = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("Tables.fxml")));
-        Parent kitchen = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("Kitchen.fxml")));
+        Parent tables = FetchFXML.loadFXML("Tables.fxml");
+        Parent kitchen = FetchFXML.loadFXML("Kitchen.fxml");
 
         screens.getChildren().addAll(waitlist, tables, kitchen);
 
@@ -37,7 +36,7 @@ public class Main extends Application {
         buttonManager.setupAddGuestButton(waitlist);
         buttonManager.setupRemoveGuestButton(waitlist);
         buttonManager.setupTableButtons(tables);
-        buttonManager.setupAddOrderButton(kitchen);
+        buttonManager.setupAddOrderButton(Objects.requireNonNull(kitchen));
 
         TabListener tabListener = new TabListener(screenManager);
         tabListener.setupWaitlistListener(root);
