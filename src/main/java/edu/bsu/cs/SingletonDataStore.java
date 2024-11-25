@@ -10,7 +10,7 @@ public class SingletonDataStore {
 
     private SingletonDataStore() {
         partyList = new ArrayList<>();
-        phonebook = new Phonebook("restaurantData.csv");
+        phonebook = new Phonebook("src/main/resources/restaurantData.csv");
     }
 
     public static SingletonDataStore getInstance() {

@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PhonebookTest {
     private Phonebook phonebook;
-    private final String csvFilePath = "testPhonebook.csv";
+    private final String csvFilePath = "src/test/resources/testPhonebook.csv";
 
     @BeforeEach
     void setUp()  {
