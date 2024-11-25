@@ -6,14 +6,13 @@ import java.util.List;
 public class Order {
     private int orderID;
     private int tableNumber;
-    private int waitTime;
+    private int timer;
 
     private List<OrderItem> itemList;
 
-    public void createNewOrder(int orderID, int tableNumber, int waitTime){
+    public void SetInitialInfo(int orderID, int tableNumber){
         this.orderID = orderID;
         this.tableNumber = tableNumber;
-        this.waitTime = waitTime;
         this.itemList = new ArrayList<>();
     }
 

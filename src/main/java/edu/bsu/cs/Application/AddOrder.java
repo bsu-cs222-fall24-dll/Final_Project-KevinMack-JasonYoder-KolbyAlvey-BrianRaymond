@@ -1,5 +1,6 @@
 package edu.bsu.cs.Application;
 
+import edu.bsu.cs.Order;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,6 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class AddOrder {
@@ -17,6 +20,8 @@ public class AddOrder {
             "chicken-sandwich", "cobb-salad", "chicken-tenders", "straight-fries",
             "curly-fries", "mac-n-cheese", "side-salad", "fruit-plate", "applesauce",
             "fountain-drink", "lemonade", "water"};
+
+    List<Order> listOfOrders = new ArrayList<Order>();
 
     public void showAddOrder() {
         Stage orderStage = new Stage();
@@ -27,6 +32,7 @@ public class AddOrder {
         orderStage.setScene(orderScreen);
         orderStage.setResizable(false);
         orderStage.show();
+        setUpSubmitOrderButton(Objects.requireNonNull(addOrderFXML));
     }
 
     private Parent fetchFXMLFile() {
@@ -57,6 +63,20 @@ public class AddOrder {
         specialInstructionsField.clear();
     }
 
+    private void setUpSubmitOrderButton(Parent orderScreen){
+        Button SubmitOrderButton = (Button) orderScreen.lookup("#addOrderButton");
+        SubmitOrderButton.setOnAction(e -> createNewOrder());
+    }
 
+    private void createNewOrder(){
+        int ID = generateNewID();
+        Order order = new Order();
+        listOfOrders.add(order);
+        order.SetInitialInfo(ID, 1);
+    }
+
+    private int generateNewID(){
+        return 1;
+    }
 
 }

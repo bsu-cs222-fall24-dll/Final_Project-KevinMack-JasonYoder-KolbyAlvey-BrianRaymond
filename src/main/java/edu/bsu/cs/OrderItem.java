@@ -4,6 +4,8 @@ public class OrderItem {
     private String itemName;
     private boolean completed;
 
+    private String specialInstructions;
+
     public void specifyItem(String itemName){
         this.itemName = itemName;
         completed = false;
