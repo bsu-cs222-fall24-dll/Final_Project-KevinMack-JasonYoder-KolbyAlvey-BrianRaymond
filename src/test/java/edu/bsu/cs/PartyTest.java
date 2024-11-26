@@ -10,7 +10,7 @@ public class PartyTest {
     public void testPartyCreation() {
         Party party = new Party(4, "kevin", "123-155-1234", 20);
 
-        assertEquals(1, party.getId());
+        assertEquals(1, party.getPartyId());
         assertEquals(4, party.getSize());
         assertEquals("kevin", party.getName());
         assertEquals("123-155-1234", party.getPhoneNumber());
@@ -22,8 +22,8 @@ public class PartyTest {
         Party party1 = new Party(2, "Jason", "312-322-9999", 15);
         Party party2 = new Party(3, "Kolby", "317-737-5487", 10);
 
-        assertEquals(1, party1.getId());
-        assertEquals(2, party2.getId());
+        assertEquals(1, party1.getPartyId());
+        assertEquals(2, party2.getPartyId());
     }
 
     @Test

@@ -24,7 +24,7 @@ public class PartyRemover extends PartyHBoxBuilder {
 
         for (Party party : partyList) {
             String name = party.getName();
-            int id = party.getId();
+            int id = party.getPartyId();
             dialog.getItems().add(name);
             nameToIdMap.put(name, id);
         }
@@ -33,7 +33,7 @@ public class PartyRemover extends PartyHBoxBuilder {
         dialog.setHeaderText("Select a party to remove:");
         dialog.showAndWait().ifPresent(selected -> {
             int idToRemove = nameToIdMap.get(selected);
-            partyList.removeIf(party -> party.getId() == idToRemove);
+            partyList.removeIf(party -> party.getPartyId() == idToRemove);
             updatePartyListDisplay();
         });
     }

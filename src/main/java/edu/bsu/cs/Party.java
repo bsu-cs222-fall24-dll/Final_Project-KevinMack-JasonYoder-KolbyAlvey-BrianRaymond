@@ -1,23 +1,23 @@
 package edu.bsu.cs;
 
 public class Party {
-    private static int idCounter = 0;
-    private final int id;
+    private static int partyIdCounter = 0;
+    private final int partyId;
     private final int size;
     private final String name;
     private final String phoneNumber;
     private final int waitTime;
 
     public Party(int size, String name, String phoneNumber, int waitTime) {
-        this.id = ++idCounter;
+        this.partyId = ++partyIdCounter;
         this.size = size;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.waitTime = waitTime;
     }
 
-    public int getId() {
-        return id;
+    public int getPartyId() {
+        return partyId;
     }
 
     public int getSize() {
@@ -37,6 +37,6 @@ public class Party {
     }
 
     public static void resetCounter() {
-        idCounter = 0;
+        partyIdCounter = 0;
     }
 }

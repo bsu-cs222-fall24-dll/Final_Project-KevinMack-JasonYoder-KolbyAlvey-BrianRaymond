@@ -9,7 +9,7 @@ public class PartyHBoxBuilder {
     HBox createPartyHBox(Party party) {
         HBox partyHBox = new HBox(10);
         partyHBox.setPrefHeight(45);
-        partyHBox.setUserData(party.getId());
+        partyHBox.setUserData(party.getPartyId());
 
         TextField sizeField = createNonEditableField(String.valueOf(party.getSize()));
         TextField nameField = createNonEditableField(party.getName());

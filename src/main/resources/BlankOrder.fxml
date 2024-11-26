@@ -8,12 +8,12 @@
 
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="260.0" xmlns="http://javafx.com/javafx/23.0.1" >
-      <TextField id="tableNumber" alignment="CENTER" editable="false" prefHeight="38.0" prefWidth="185.0">
+      <TextField id="id" alignment="CENTER" editable="false" prefHeight="38.0" prefWidth="185.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </TextField>
-      <TextField alignment="CENTER" editable="false" prefHeight="242.0" prefWidth="260.0">
+      <TextField id="orderDetails" alignment="CENTER" editable="false" prefHeight="242.0" prefWidth="260.0">
          <font>
             <Font size="14.0" />
          </font>

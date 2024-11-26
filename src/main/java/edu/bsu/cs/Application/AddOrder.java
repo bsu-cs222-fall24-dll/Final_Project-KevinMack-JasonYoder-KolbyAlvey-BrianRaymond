@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,7 +26,7 @@ public class AddOrder {
 
     List<Order> listOfOrders = new ArrayList<Order>();
 
-    public void showAddOrder() {
+    public void showAddOrder(Parent kitchenReference) {
         Stage orderStage = new Stage();
         Parent addOrderFXML = FetchFXML.loadFXML("AddOrder.fxml");
         Scene orderScreen = new Scene(addOrderFXML);
@@ -33,7 +35,7 @@ public class AddOrder {
         orderStage.setScene(orderScreen);
         orderStage.setResizable(false);
         orderStage.show();
-        setUpSubmitOrderButton(Objects.requireNonNull(addOrderFXML));
+        setUpSubmitOrderButton(Objects.requireNonNull(addOrderFXML), orderStage, kitchenReference);
     }
 
     private void setButtonActions(Parent orderScreen) {
@@ -44,9 +46,6 @@ public class AddOrder {
             Button itemButton = (Button) orderScreen.lookup("#" + item);
             itemButton.setOnAction(e -> appendToOrderBox(itemButton.getText(), specialInstructionsField, orderBox));
         }
-
-        Button submitButton = (Button) orderScreen.lookup("#submitOrderButton");
-        submitButton.setOnAction(e -> submitOrder(orderBox));
     }
 
     private void appendToOrderBox(String foodItem, TextField specialInstructionsField, TextArea orderBox) {
@@ -58,25 +57,43 @@ public class AddOrder {
         specialInstructionsField.clear();
     }
 
-    private void setUpSubmitOrderButton(Parent orderScreen){
-        Button SubmitOrderButton = (Button) orderScreen.lookup("#addOrderButton");
-        SubmitOrderButton.setOnAction(e -> createNewOrder());
-    }
-    private void submitOrder(TextArea orderBox) {
-        String order = orderBox.getText();
-        Parent newOrder = FetchFXML.loadFXML("BlankOrder.fxml");
+    private void setUpSubmitOrderButton(Parent orderScreen, Stage orderStage, Parent kitchenReference){
+        Button submitOrderButton = (Button) orderScreen.lookup("#submitOrderButton");
+        TextArea orderBox = (TextArea) orderScreen.lookup("#orderBox");
+        submitOrderButton.setOnAction(e -> {
+            Order newOrder = createNewOrder(orderBox.getText());
+            VBox orderVBox = setUpNewOrder(newOrder);
+            addOrderToScreen(orderVBox, kitchenReference);
+            orderStage.close();
+        });
     }
 
-
-    private void createNewOrder(){
-        int ID = generateNewID();
-        Order order = new Order();
+    private Order createNewOrder(String orderInfo){
+        Order order = new Order(orderInfo);
         listOfOrders.add(order);
-        order.SetInitialInfo(ID, 1);
+        return order;
     }
 
-    private int generateNewID(){
-        return 1;
+    private VBox setUpNewOrder(Order order) {
+        VBox orderBox = (VBox) FetchFXML.loadFXML("BlankOrder.fxml");
+        TextField detailsField = (TextField) Objects.requireNonNull(orderBox).lookup("#orderDetails");
+        detailsField.setText(order.getDetails());
+        return orderBox;
+    }
+
+    private void addOrderToScreen(VBox orderBox, Parent orderScreen) {
+        int length = listOfOrders.size();
+        int row, column;
+        Parent kitchen = FetchFXML.loadFXML("Kitchen.fxml");
+        GridPane pane = (GridPane) orderScreen.lookup("#gridPane");
+
+        if (length < 3) {
+            row = 0;
+        } else if (length < 6) {
+            row = 1;
+        }
+        column = length % 3;
+
     }
 
 }
