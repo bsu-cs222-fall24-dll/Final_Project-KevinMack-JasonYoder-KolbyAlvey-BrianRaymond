@@ -40,8 +40,10 @@ public class PartyRegister extends PartyHBoxBuilder {
 
         phoneField.textProperty().addListener((observable, oldValue, newValue) -> phoneField.setText(registerLogic.formatPhoneNumber(newValue)));
         phoneField.textProperty().addListener((observable, oldValue, newValue) -> {
-            String suggestedName = phonebook.getNameByPhoneNumber(newValue);
-            nameField.setText(Objects.requireNonNullElse(suggestedName, ""));
+            if (nameField.getText().isEmpty()) {
+                String suggestedName = phonebook.getNameByPhoneNumber(newValue);
+                nameField.setText(Objects.requireNonNullElse(suggestedName, ""));
+            }
         });
 
         VBox dialogVbox = new VBox(10,
