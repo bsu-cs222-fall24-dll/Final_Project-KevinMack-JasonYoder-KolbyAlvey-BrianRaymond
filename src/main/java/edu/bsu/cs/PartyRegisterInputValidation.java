@@ -3,7 +3,7 @@ package edu.bsu.cs;
 import java.util.Comparator;
 import java.util.List;
 
-public class PartyRegisterLogic {
+public class PartyRegisterInputValidation {
     SingletonDataStore data = SingletonDataStore.getInstance();
     private final List<Party> partyList = data.getPartyList();
     private final Phonebook phonebook = data.getPhonebook();

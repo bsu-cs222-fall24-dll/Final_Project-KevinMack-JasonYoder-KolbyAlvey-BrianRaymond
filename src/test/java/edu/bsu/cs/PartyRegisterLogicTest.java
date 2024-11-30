@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PartyRegisterLogicTest {
-    private PartyRegisterLogic partyRegisterLogic;
+    private PartyRegisterInputValidation partyRegisterLogic;
 
     @BeforeEach
     public void setUp() {
-        partyRegisterLogic = new PartyRegisterLogic();
+        partyRegisterLogic = new PartyRegisterInputValidation();
     }
 
     @Test
