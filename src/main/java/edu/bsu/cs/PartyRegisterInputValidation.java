@@ -10,14 +10,15 @@ public class PartyRegisterInputValidation {
 
     public String formatPhoneNumber(String phoneNumber) {
         String cleanPhoneNumber = phoneNumber.replaceAll("\\D", "");
-
-        if (cleanPhoneNumber.length() > 6) {
-            return cleanPhoneNumber.substring(0, 3) + "-" + cleanPhoneNumber.substring(3, 6) + "-" + cleanPhoneNumber.substring(6, Math.min(10, cleanPhoneNumber.length()));
-        } else if (cleanPhoneNumber.length() > 3) {
-            return cleanPhoneNumber.substring(0, 3) + "-" + cleanPhoneNumber.substring(3);
-        } else {
-            return cleanPhoneNumber;
+        if (cleanPhoneNumber.isEmpty()) return "";
+        StringBuilder formatted = new StringBuilder();
+        for (int i = 0; i < cleanPhoneNumber.length(); i++) {
+            if (i == 3 || i == 6) {
+                formatted.append("-");
+            }
+            formatted.append(cleanPhoneNumber.charAt(i));
         }
+        return formatted.toString();
     }
 
     public boolean isValidPhoneNumber(String phoneNumber) {

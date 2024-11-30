@@ -33,10 +33,13 @@ public class PartyRegister extends PartyHBoxBuilder {
         TextField nameField = new TextField();
         TextField phoneField = new TextField();
 
-        phoneField.textProperty().addListener((observable, oldValue, newValue) -> phoneField.setText(registerLogic.formatPhoneNumber(newValue)));
         phoneField.textProperty().addListener((observable, oldValue, newValue) -> {
+            String formattedNumber = registerLogic.formatPhoneNumber(newValue);
+            if (!newValue.equals(formattedNumber)) {
+                phoneField.setText(formattedNumber);
+            }
             if (nameField.getText().isEmpty()) {
-                String suggestedName = phonebook.getNameByPhoneNumber(newValue);
+                String suggestedName = phonebook.getNameByPhoneNumber(formattedNumber);
                 nameField.setText(Objects.requireNonNullElse(suggestedName, ""));
             }
         });
