@@ -11,30 +11,27 @@ public class PartyHBoxBuilder {
         partyHBox.setPrefHeight(45);
         partyHBox.setUserData(party.getPartyId());
 
-        TextField sizeField = createNonEditableField(String.valueOf(party.getSize()));
-        TextField nameField = createNonEditableField(party.getName());
-        TextField phoneField = createNonEditableField(party.getPhoneNumber());
-        TextField waitTimeField = createEditableField(String.valueOf(party.getWaitTime()));
+        TextField sizeField = createTextField(String.valueOf(party.getSize()));
+        TextField nameField = createTextField(party.getName());
+        TextField phoneField = createTextField(party.getPhoneNumber());
+        TextField waitTimeField = createTextField(String.valueOf(party.getWaitTime()));
+
+        sizeField.setEditable(false);
+        nameField.setEditable(false);
+        phoneField.setEditable(false);
+        waitTimeField.setEditable(true);
 
         partyHBox.getChildren().addAll(sizeField, nameField, phoneField, waitTimeField);
         return partyHBox;
     }
 
-    private TextField createNonEditableField(String text) {
+
+    private TextField createTextField(String text) {
         TextField field = new TextField(text);
-        field.setEditable(false);
         field.setAlignment(Pos.CENTER);
         field.setPrefHeight(45);
         field.setStyle("-fx-font-size: 21px");
         return field;
     }
 
-    private TextField createEditableField(String text) {
-        TextField field = new TextField(text);
-        field.setEditable(true);
-        field.setAlignment(Pos.CENTER);
-        field.setPrefHeight(45);
-        field.setStyle("-fx-font-size: 21px");
-        return field;
-    }
 }
