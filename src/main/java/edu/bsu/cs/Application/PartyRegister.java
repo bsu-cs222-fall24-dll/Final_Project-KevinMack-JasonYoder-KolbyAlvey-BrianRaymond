@@ -1,9 +1,6 @@
 package edu.bsu.cs.Application;
 
-import edu.bsu.cs.Party;
-import edu.bsu.cs.PartyRegisterLogic;
-import edu.bsu.cs.Phonebook;
-import edu.bsu.cs.SingletonDataStore;
+import edu.bsu.cs.*;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -36,7 +33,6 @@ public class PartyRegister extends PartyHBoxBuilder {
         TextField sizeField = new TextField();
         TextField nameField = new TextField();
         TextField phoneField = new TextField();
-        TextField waitTimeField = new TextField();
 
         phoneField.textProperty().addListener((observable, oldValue, newValue) -> phoneField.setText(registerLogic.formatPhoneNumber(newValue)));
         phoneField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -49,8 +45,7 @@ public class PartyRegister extends PartyHBoxBuilder {
         VBox dialogVbox = new VBox(10,
                 new Label("Phone Number:"), phoneField,
                 new Label("Name:"), nameField,
-                new Label("Size:"), sizeField,
-                new Label("Wait Time:"), waitTimeField
+                new Label("Size:"), sizeField
         );
 
         dialogVbox.setPadding(new Insets(20));
@@ -60,15 +55,14 @@ public class PartyRegister extends PartyHBoxBuilder {
         addButton.setOnAction(e -> {
             if(!registerLogic.isValidPhoneNumber(phoneField.getText())) {
                 alert.showPhoneNumberAlert();
-            } else if (registerLogic.isNotRealNumber(sizeField.getText()) || registerLogic.isNotRealNumber(waitTimeField.getText())) {
+            } else if (registerLogic.isNotRealNumber(sizeField.getText())) {
                 alert.showInvalidCharacterAlert();
-            } else if(registerLogic.isNotInboundInteger(Integer.parseInt(sizeField.getText())) || registerLogic.isNotInboundInteger(Integer.parseInt(waitTimeField.getText()))) {
+            } else if(registerLogic.isNotInboundInteger(Integer.parseInt(sizeField.getText()))) {
                 alert.showOutOfBoundsIntegerAlert();
             } else {
                 addParty(
                         Integer.parseInt(sizeField.getText()),
-                        nameField.getText(), phoneField.getText(),
-                        Integer.parseInt(waitTimeField.getText())
+                        nameField.getText(), phoneField.getText()
                 );
                 dialog.close();
             }
@@ -81,8 +75,9 @@ public class PartyRegister extends PartyHBoxBuilder {
         dialog.showAndWait();
     }
 
-    private void addParty(int size, String name, String phoneNumber, int waitTime) {
-        registerLogic.addPartyToData(size, name, phoneNumber, waitTime);
+    private void addParty(int size, String name, String phoneNumber) {
+        WaitTime calcWaitTime = new WaitTime();
+        registerLogic.addPartyToData(size, name, phoneNumber, calcWaitTime.waitTimeAlgorithm());
         partyListVBOX.getChildren().clear();
         for (Party sortedParty : partyList) {
             HBox partyHBox = createPartyHBox(sortedParty);

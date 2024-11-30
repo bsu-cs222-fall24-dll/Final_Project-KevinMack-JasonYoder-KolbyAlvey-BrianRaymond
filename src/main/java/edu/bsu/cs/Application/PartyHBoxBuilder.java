@@ -14,7 +14,7 @@ public class PartyHBoxBuilder {
         TextField sizeField = createNonEditableField(String.valueOf(party.getSize()));
         TextField nameField = createNonEditableField(party.getName());
         TextField phoneField = createNonEditableField(party.getPhoneNumber());
-        TextField waitTimeField = createNonEditableField(String.valueOf(party.getWaitTime()));
+        TextField waitTimeField = createEditableField(String.valueOf(party.getWaitTime()));
 
         partyHBox.getChildren().addAll(sizeField, nameField, phoneField, waitTimeField);
         return partyHBox;
@@ -23,6 +23,15 @@ public class PartyHBoxBuilder {
     private TextField createNonEditableField(String text) {
         TextField field = new TextField(text);
         field.setEditable(false);
+        field.setAlignment(Pos.CENTER);
+        field.setPrefHeight(45);
+        field.setStyle("-fx-font-size: 21px");
+        return field;
+    }
+
+    private TextField createEditableField(String text) {
+        TextField field = new TextField(text);
+        field.setEditable(true);
         field.setAlignment(Pos.CENTER);
         field.setPrefHeight(45);
         field.setStyle("-fx-font-size: 21px");

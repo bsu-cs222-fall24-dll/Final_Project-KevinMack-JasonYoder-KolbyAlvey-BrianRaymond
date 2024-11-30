@@ -1,18 +1,18 @@
 package edu.bsu.cs.Application;
 
+import edu.bsu.cs.SingletonDataStore;
 import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class TablesListener {
-    private final Map<Integer, TimerTask> timerTasks = new HashMap<>();
-    private final Map<Integer, Integer> elapsedTime = new HashMap<>();
+    SingletonDataStore data = SingletonDataStore.getInstance();
+    private final Map<Integer, TimerTask> timerTasks = data.getTimerTasks();
+    private final Map<Integer, Integer> elapsedTime = data.getElapsedTime();
     private final Timer timer = new Timer(true);
 
     public void toggleTableState(int tableId, String tableType, Button tableButton, Parent tables) {
