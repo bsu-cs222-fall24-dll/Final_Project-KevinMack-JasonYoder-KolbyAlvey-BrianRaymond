@@ -27,7 +27,7 @@ public class PartyRegisterLogic {
     }
 
     public boolean isNotInboundInteger(int number) {
-        return number > 75;
+        return number > 60;
     }
 
     public boolean isNotRealNumber(String textBoxValue) {

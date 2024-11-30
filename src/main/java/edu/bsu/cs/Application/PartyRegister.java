@@ -25,7 +25,6 @@ public class PartyRegister extends PartyHBoxBuilder {
     }
 
     public void showAddPartyScreen() {
-        Alerts alert = new Alerts();
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.setTitle("Add Party");
@@ -53,13 +52,7 @@ public class PartyRegister extends PartyHBoxBuilder {
         Button addButton = new Button("Add");
 
         addButton.setOnAction(e -> {
-            if(!registerLogic.isValidPhoneNumber(phoneField.getText())) {
-                alert.showPhoneNumberAlert();
-            } else if (registerLogic.isNotRealNumber(sizeField.getText())) {
-                alert.showInvalidCharacterAlert();
-            } else if(registerLogic.isNotInboundInteger(Integer.parseInt(sizeField.getText()))) {
-                alert.showOutOfBoundsIntegerAlert();
-            } else {
+            if(checkAddParty(phoneField.getText(), sizeField.getText())) {
                 addParty(
                         Integer.parseInt(sizeField.getText()),
                         nameField.getText(), phoneField.getText()
@@ -73,6 +66,23 @@ public class PartyRegister extends PartyHBoxBuilder {
         Scene dialogScene = new Scene(dialogVbox, 300, 400);
         dialog.setScene(dialogScene);
         dialog.showAndWait();
+    }
+
+    private boolean checkAddParty(String phoneNumber, String partySize) {
+        Alerts alert = new Alerts();
+        if(!registerLogic.isValidPhoneNumber(phoneNumber)) {
+            alert.showPhoneNumberAlert();
+            return false;
+        }
+        if (registerLogic.isNotRealNumber(partySize)) {
+            alert.showInvalidCharacterAlert();
+            return false;
+        }
+        if(registerLogic.isNotInboundInteger(Integer.parseInt(partySize))) {
+            alert.showOutOfBoundsIntegerAlert();
+            return false;
+        }
+        return true;
     }
 
     private void addParty(int size, String name, String phoneNumber) {
