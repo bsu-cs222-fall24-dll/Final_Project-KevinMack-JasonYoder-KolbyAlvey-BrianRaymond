@@ -1,19 +1,13 @@
 package edu.bsu.cs.Application;
 
-import edu.bsu.cs.SingletonDataStore;
-import javafx.application.Platform;
+import edu.bsu.cs.Timers;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
+
 
 public class TablesListener {
-    SingletonDataStore data = SingletonDataStore.getInstance();
-    private final Map<Integer, TimerTask> timerTasks = data.getTimerTasks();
-    private final Map<Integer, Integer> elapsedTime = data.getElapsedTime();
-    private final Timer timer = new Timer(true);
+    Timers timerHandler = new Timers();
 
     public void toggleTableState(int tableId, String tableType, Button tableButton, Parent tables) {
         String openClass = "open-" + tableType + "-table";
@@ -24,46 +18,13 @@ public class TablesListener {
         if (tableButton.getStyleClass().contains(openClass)) {
             tableButton.getStyleClass().remove(openClass);
             tableButton.getStyleClass().add(occupiedClass);
-            startTimer(tableId, timerField);
+            timerHandler.startTimer(tableId, timerField);
         } else {
             tableButton.getStyleClass().remove(occupiedClass);
             tableButton.getStyleClass().add(openClass);
-            stopAndResetTimer(tableId, timerField);
+            timerHandler.stopAndResetTimer(tableId, timerField);
         }
     }
 
-    private void startTimer(int tableId, TextField timerField) {
-        stopAndResetTimer(tableId, timerField);
-        elapsedTime.put(tableId, 0);
 
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                int seconds = elapsedTime.get(tableId) + 1;
-                elapsedTime.put(tableId, seconds);
-                updateTimerField(timerField, seconds);
-            }
-        };
-
-        timerTasks.put(tableId, task);
-        timer.scheduleAtFixedRate(task, 0, 1000);
-    }
-
-    private void stopAndResetTimer(int tableId, TextField timerField) {
-        TimerTask task = timerTasks.get(tableId);
-        if (task != null) {
-            task.cancel();
-            timerTasks.remove(tableId);
-        }
-        elapsedTime.put(tableId, 0);
-        updateTimerField(timerField, 0);
-    }
-
-    private void updateTimerField(TextField timerField, int seconds) {
-        int minutes = seconds / 60;
-        int remainingSeconds = seconds % 60;
-        String timeText = String.format("%d:%02d", minutes, remainingSeconds);
-
-        Platform.runLater(() -> timerField.setText(timeText));
-    }
 }
