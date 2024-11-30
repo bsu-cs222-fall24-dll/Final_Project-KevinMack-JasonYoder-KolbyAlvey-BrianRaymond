@@ -1,7 +1,6 @@
 package edu.bsu.cs.Application;
 
 import edu.bsu.cs.Order;
-import javafx.fxml.FXMLLoader;
 import edu.bsu.cs.FetchFXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,8 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -24,7 +21,7 @@ public class AddOrder {
             "curly-fries", "mac-n-cheese", "side-salad", "fruit-plate", "applesauce",
             "fountain-drink", "lemonade", "water"};
 
-    List<Order> listOfOrders = new ArrayList<Order>();
+    List<Order> listOfOrders = new ArrayList<>();
 
     public void showAddOrder(Parent kitchenReference) {
         Stage orderStage = new Stage();
@@ -61,22 +58,19 @@ public class AddOrder {
         Button submitOrderButton = (Button) orderScreen.lookup("#submitOrderButton");
         TextArea orderBox = (TextArea) orderScreen.lookup("#orderBox");
         submitOrderButton.setOnAction(e -> {
-            Order newOrder = createNewOrder(orderBox.getText());
+            Order newOrder = new Order(orderBox.getText());
             VBox orderVBox = setUpNewOrder(newOrder);
             addOrderToScreen(orderVBox, kitchenReference);
+            listOfOrders.add(newOrder);
             orderStage.close();
         });
     }
 
-    private Order createNewOrder(String orderInfo){
-        Order order = new Order(orderInfo);
-        listOfOrders.add(order);
-        return order;
-    }
-
     private VBox setUpNewOrder(Order order) {
         VBox orderBox = (VBox) FetchFXML.loadFXML("BlankOrder.fxml");
+        TextField idField = (TextField) Objects.requireNonNull(orderBox).lookup("#id");
         TextField detailsField = (TextField) Objects.requireNonNull(orderBox).lookup("#orderDetails");
+        idField.setText(String.valueOf(order.getId()));
         detailsField.setText(order.getDetails());
         return orderBox;
     }
@@ -84,15 +78,18 @@ public class AddOrder {
     private void addOrderToScreen(VBox orderBox, Parent orderScreen) {
         int length = listOfOrders.size();
         int row, column;
-        Parent kitchen = FetchFXML.loadFXML("Kitchen.fxml");
         GridPane pane = (GridPane) orderScreen.lookup("#gridPane");
 
         if (length < 3) {
             row = 0;
         } else if (length < 6) {
             row = 1;
+        } else {
+            row = 2;
         }
         column = length % 3;
+
+        pane.add(orderBox, column, row);
 
     }
 

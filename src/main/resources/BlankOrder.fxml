@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="260.0" xmlns="http://javafx.com/javafx/23.0.1" >
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="260.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
       <TextField id="id" alignment="CENTER" editable="false" prefHeight="38.0" prefWidth="185.0">
          <font>
             <Font name="System Bold" size="16.0" />
@@ -19,17 +18,12 @@
          </font>
       </TextField>
       <HBox prefHeight="38.0" prefWidth="260.0">
-            <Button alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="58.0" prefWidth="86.6" text="Cancel">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
-            <TextField alignment="CENTER" editable="false" prefHeight="50.0" prefWidth="86.0" text="0:00">
+            <TextField alignment="CENTER" editable="false" prefHeight="38.0" prefWidth="135.0" text="0:00">
                <font>
                   <Font size="17.0" />
                </font>
             </TextField>
-            <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="86.6" text="Complete">
+            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="129.0" text="Clear">
                <font>
                   <Font size="14.0" />
                </font>

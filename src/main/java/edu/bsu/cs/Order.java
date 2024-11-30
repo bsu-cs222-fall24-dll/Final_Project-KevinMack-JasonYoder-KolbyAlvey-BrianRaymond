@@ -15,6 +15,10 @@ public class Order {
         return orderInfo;
     }
 
+    public int getId() {
+        return orderId;
+    }
+
     public static void resetCounter() {
         orderIdCounter = 0;
     }
