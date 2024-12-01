@@ -69,7 +69,7 @@ public class AddOrder {
     private VBox setUpNewOrder(Order order) {
         VBox orderBox = (VBox) FetchFXML.loadFXML("BlankOrder.fxml");
         TextField idField = (TextField) Objects.requireNonNull(orderBox).lookup("#id");
-        TextField detailsField = (TextField) Objects.requireNonNull(orderBox).lookup("#orderDetails");
+        TextArea detailsField = (TextArea) Objects.requireNonNull(orderBox).lookup("#orderDetails");
         idField.setText(String.valueOf(order.getId()));
         detailsField.setText(order.getDetails());
         return orderBox;
@@ -88,8 +88,9 @@ public class AddOrder {
             row = 2;
         }
         column = length % 3;
-
-        pane.add(orderBox, column, row);
+        if (listOfOrders.size() < 6) {
+            pane.add(orderBox, column, row);
+        }
 
     }
 
