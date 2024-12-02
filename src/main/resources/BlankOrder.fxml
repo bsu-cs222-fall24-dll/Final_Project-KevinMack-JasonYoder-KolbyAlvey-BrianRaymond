@@ -18,15 +18,15 @@
          <Font size="15.0" />
       </font></TextArea>
       <HBox prefHeight="38.0" prefWidth="260.0">
-            <TextField alignment="CENTER" editable="false" prefHeight="38.0" prefWidth="135.0" text="0:00">
-               <font>
+          <TextField id="timerField" alignment="CENTER" editable="false" prefHeight="38.0" prefWidth="135.0" text="0:00">
+              <font>
                   <Font size="17.0" />
-               </font>
-            </TextField>
-            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="129.0" text="Clear">
-               <font>
+              </font>
+          </TextField>
+          <Button id="clearButton" mnemonicParsing="false" prefHeight="38.0" prefWidth="129.0" text="Clear">
+              <font>
                   <Font size="14.0" />
-               </font>
-            </Button>
+              </font>
+          </Button>
       </HBox>
 </VBox>

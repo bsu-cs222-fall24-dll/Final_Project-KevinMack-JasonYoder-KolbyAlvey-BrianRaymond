@@ -12,8 +12,9 @@ public class FetchFXML {
         try {
             return FXMLLoader.load(Objects.requireNonNull(AddOrder.class.getClassLoader().getResource(fxmlFile)));
         } catch(IOException e) {
-            System.err.println(e.getMessage());
+            System.err.println("Error loading FXML file: " + e.getMessage());
         }
         return null;
     }
 }
+

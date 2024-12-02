@@ -2,6 +2,8 @@ package edu.bsu.cs.Application;
 
 import edu.bsu.cs.Order;
 import edu.bsu.cs.FetchFXML;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -70,10 +74,40 @@ public class AddOrder {
         VBox orderBox = (VBox) FetchFXML.loadFXML("BlankOrder.fxml");
         TextField idField = (TextField) Objects.requireNonNull(orderBox).lookup("#id");
         TextArea detailsField = (TextArea) Objects.requireNonNull(orderBox).lookup("#orderDetails");
+        Button clearButton = (Button) orderBox.lookup("#clearButton");
+        TextField timerField = (TextField) orderBox.lookup("#timerField");
+
         idField.setText(String.valueOf(order.getId()));
         detailsField.setText(order.getDetails());
+
+
+        int[] seconds = {0};
+
+        Timeline timer = new Timeline(
+                new KeyFrame(Duration.seconds(1), e -> {
+                    seconds[0]++;
+                    int minutes = seconds[0] / 60;
+                    int remainingSeconds = seconds[0] % 60;
+                    String timeText = String.format("%d:%02d", minutes, remainingSeconds);
+                    timerField.setText(timeText);
+                })
+        );
+        timer.setCycleCount(Timeline.INDEFINITE);
+        timer.play();
+
+        clearButton.setOnAction(e -> {
+
+            detailsField.clear();
+            idField.clear();
+            timer.stop();
+            seconds[0] = 0;
+            timerField.setText("0:00");
+        });
+
         return orderBox;
     }
+
+
 
     private void addOrderToScreen(VBox orderBox, Parent orderScreen) {
         int length = listOfOrders.size();
