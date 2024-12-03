@@ -15,7 +15,7 @@ public class Alerts {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Number entered too large");
         alert.setHeaderText(null);
-        alert.setContentText("No numbers larger than 75 are allowed.");
+        alert.setContentText("No numbers larger than 60 are allowed.");
         alert.showAndWait();
     }
 
