@@ -1,10 +1,12 @@
 package edu.bsu.cs;
 
+import java.util.List;
 import java.util.Map;
 
 public class WaitTime {
     SingletonDataStore data = SingletonDataStore.getInstance();
     private final Map<Integer, Integer> elapsedTime = data.getElapsedTime();
+    private final List<Party> partyList = data.getPartyList();
 
     public int waitTimeAlgorithm() {
         int occupiedTables = 0;
@@ -17,7 +19,8 @@ public class WaitTime {
         int averageSeatTime = calculateAverageSeatTime(occupiedTables);
         int baseWaitTime = Math.min(averageSeatTime, 20);
         int additionalWaitTime = (occupiedTables > 6) ? (occupiedTables - 6) * 3 : 0;
-        return baseWaitTime + additionalWaitTime;
+        int waitlistLengthContribution = partyList.size() + 2;
+        return baseWaitTime + additionalWaitTime + waitlistLengthContribution;
     }
 
     private int calculateAverageSeatTime(int numberOfTables) {
