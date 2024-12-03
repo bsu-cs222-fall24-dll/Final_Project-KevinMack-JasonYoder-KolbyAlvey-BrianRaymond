@@ -96,26 +96,12 @@ public class AddOrder {
         timer.play();
 
         clearButton.setOnAction(e -> {
-
             detailsField.clear();
             idField.clear();
             timer.stop();
             seconds[0] = 0;
             timerField.setText("0:00");
-            List<Order> currentOrders = new ArrayList<>();
-            for (Order currentOrder : listOfOrders) {
-                if (currentOrder.getId() != order.getId()) {
-                    currentOrders.add(currentOrder);
-                }
-            }
-            listOfOrders.removeAll(listOfOrders);
-            for (Order currentOrder : currentOrders) {
-                VBox orderVBox = setUpNewOrder(currentOrder, kitchen);
-                addOrderToScreen(orderVBox, kitchen);
-                listOfOrders.add(currentOrder);
-            }
-
-
+            clear(order, kitchen);
         });
 
         return orderBox;
@@ -140,6 +126,22 @@ public class AddOrder {
             pane.add(orderBox, column, row);
         }
 
+    }
+
+    private void clear(Order order, Parent kitchen) {
+
+        List<Order> currentOrders = new ArrayList<>();
+        for (Order currentOrder : listOfOrders) {
+            if (currentOrder.getId() != order.getId()) {
+                currentOrders.add(currentOrder);
+            }
+        }
+        listOfOrders.removeAll(listOfOrders);
+        for (Order currentOrder : currentOrders) {
+            VBox orderVBox = setUpNewOrder(currentOrder, kitchen);
+            addOrderToScreen(orderVBox, kitchen);
+            listOfOrders.add(currentOrder);
+        }
     }
 
 }
