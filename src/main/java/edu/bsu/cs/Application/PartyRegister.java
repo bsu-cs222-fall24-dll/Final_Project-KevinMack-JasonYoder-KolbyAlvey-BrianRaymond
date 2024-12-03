@@ -28,6 +28,7 @@ public class PartyRegister extends PartyHBoxBuilder {
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.setTitle("Add Party");
+        dialog.setResizable(false);
 
         TextField sizeField = new TextField();
         TextField nameField = new TextField();
