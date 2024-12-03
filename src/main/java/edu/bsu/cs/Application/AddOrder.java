@@ -63,14 +63,14 @@ public class AddOrder {
         TextArea orderBox = (TextArea) orderScreen.lookup("#orderBox");
         submitOrderButton.setOnAction(e -> {
             Order newOrder = new Order(orderBox.getText());
-            VBox orderVBox = setUpNewOrder(newOrder);
+            VBox orderVBox = setUpNewOrder(newOrder, kitchenReference);
             addOrderToScreen(orderVBox, kitchenReference);
             listOfOrders.add(newOrder);
             orderStage.close();
         });
     }
 
-    private VBox setUpNewOrder(Order order) {
+    private VBox setUpNewOrder(Order order, Parent kitchen) {
         VBox orderBox = (VBox) FetchFXML.loadFXML("BlankOrder.fxml");
         TextField idField = (TextField) Objects.requireNonNull(orderBox).lookup("#id");
         TextArea detailsField = (TextArea) Objects.requireNonNull(orderBox).lookup("#orderDetails");
@@ -102,6 +102,20 @@ public class AddOrder {
             timer.stop();
             seconds[0] = 0;
             timerField.setText("0:00");
+            List<Order> currentOrders = new ArrayList<>();
+            for (Order currentOrder : listOfOrders) {
+                if (currentOrder.getId() != order.getId()) {
+                    currentOrders.add(currentOrder);
+                }
+            }
+            listOfOrders.removeAll(listOfOrders);
+            for (Order currentOrder : currentOrders) {
+                VBox orderVBox = setUpNewOrder(currentOrder, kitchen);
+                addOrderToScreen(orderVBox, kitchen);
+                listOfOrders.add(currentOrder);
+            }
+
+
         });
 
         return orderBox;
