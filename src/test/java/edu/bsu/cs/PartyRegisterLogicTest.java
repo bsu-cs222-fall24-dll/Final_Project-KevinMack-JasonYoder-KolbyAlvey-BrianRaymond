@@ -48,7 +48,7 @@ public class PartyRegisterLogicTest {
 
     @Test
     public void testIsInboundNumberOnBorder() {
-        assertFalse(partyRegisterLogic.isNotInboundInteger(75));
+        assertFalse(partyRegisterLogic.isNotInboundInteger(60));
     }
 
     @Test
