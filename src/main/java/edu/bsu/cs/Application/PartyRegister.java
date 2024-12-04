@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -20,11 +19,11 @@ public class PartyRegister extends PartyHBoxBuilder {
     SingletonDataStore data = SingletonDataStore.getInstance();
     private final List<Party> partyList = data.getPartyList();
     private final Phonebook phonebook = data.getPhonebook();
-    private final VBox partyListVBOX;
 
     public PartyRegister(VBox partyListVBOX) {
-        this.partyListVBOX = partyListVBOX;
+        super(partyListVBOX);
     }
+
 
     public void showAddPartyScreen() {
         Stage dialog = createDialog();
@@ -121,12 +120,6 @@ public class PartyRegister extends PartyHBoxBuilder {
         partyList.sort(Comparator.comparingInt(Party::getWaitTime));
         sortPartyList();
     }
-    public void sortPartyList() {
-        partyListVBOX.getChildren().clear();
-        for (Party sortedParty : partyList) {
-            HBox partyHBox = createPartyHBox(sortedParty);
-            partyHBox.setUserData(sortedParty.getName());
-            partyListVBOX.getChildren().add(partyHBox);
-        }
-    }
+
+
 }

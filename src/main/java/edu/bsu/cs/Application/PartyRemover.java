@@ -12,10 +12,9 @@ import java.util.List;
 public class PartyRemover extends PartyHBoxBuilder {
     SingletonDataStore data = SingletonDataStore.getInstance();
     private final List<Party> partyList = data.getPartyList();
-    private final VBox partyListVBox;
 
-    public PartyRemover(VBox partyListVBox) {
-        this.partyListVBox = partyListVBox;
+    public PartyRemover(VBox partyListVBOX) {
+        super(partyListVBOX);
     }
 
     public void removeParty() {
@@ -34,17 +33,8 @@ public class PartyRemover extends PartyHBoxBuilder {
         dialog.showAndWait().ifPresent(selected -> {
             int idToRemove = nameToIdMap.get(selected);
             partyList.removeIf(party -> party.getPartyId() == idToRemove);
-            updatePartyListDisplay();
+            sortPartyList();
         });
-    }
-
-    private void updatePartyListDisplay() {
-        partyListVBox.getChildren().clear();
-        for (Party sortedParty : partyList) {
-            HBox partyHBox = createPartyHBox(sortedParty);
-            partyHBox.setUserData(sortedParty.getName());
-            partyListVBox.getChildren().add(partyHBox);
-        }
     }
 
 }
