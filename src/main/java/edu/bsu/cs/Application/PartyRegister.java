@@ -27,17 +27,46 @@ public class PartyRegister extends PartyHBoxBuilder {
     }
 
     public void showAddPartyScreen() {
+        Stage dialog = createDialog();
+        VBox dialogVbox = createDialogVBox();
+
+        TextField phoneField = new TextField();
+        TextField nameField = new TextField();
+        TextField sizeField = new TextField();
+        TextField[] inputFields = {sizeField, nameField, phoneField};
+
+        setupPhoneFieldListener(phoneField, nameField);
+
+        Button addButton = createAddButton(inputFields, dialog);
+        dialogVbox.getChildren().addAll(
+                new Label("Phone Number:"), phoneField,
+                new Label("Name:"), nameField,
+                new Label("Size:"), sizeField,
+                addButton
+        );
+
+        dialog.setScene(new Scene(dialogVbox));
+        dialog.showAndWait();
+    }
+
+
+    private Stage createDialog() {
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.setTitle("Add Party");
         dialog.setResizable(false);
+        dialog.setWidth(300);
+        dialog.setHeight(400);
+        return dialog;
+    }
 
-        WaitTime calcWaitTime = new WaitTime();
+    private VBox createDialogVBox() {
+        VBox dialogVbox = new VBox(10);
+        dialogVbox.setPadding(new Insets(20));
+        return dialogVbox;
+    }
 
-        TextField sizeField = new TextField();
-        TextField nameField = new TextField();
-        TextField phoneField = new TextField();
-
+    private void setupPhoneFieldListener(TextField phoneField, TextField nameField) {
         phoneField.textProperty().addListener((observable, oldValue, newValue) -> {
             String formattedNumber = registerLogic.formatPhoneNumber(newValue);
             if (!newValue.equals(formattedNumber)) {
@@ -48,33 +77,24 @@ public class PartyRegister extends PartyHBoxBuilder {
                 nameField.setText(Objects.requireNonNullElse(suggestedName, ""));
             }
         });
+    }
 
-        VBox dialogVbox = new VBox(10,
-                new Label("Phone Number:"), phoneField,
-                new Label("Name:"), nameField,
-                new Label("Size:"), sizeField
-        );
-
-        dialogVbox.setPadding(new Insets(20));
-
+    private Button createAddButton(TextField[] inputFields, Stage dialog) {
         Button addButton = new Button("Add");
-
-
-
         addButton.setOnAction(e -> {
-            if(checkAddParty(phoneField.getText(), sizeField.getText())) {
-                Party newparty = new Party(Integer.parseInt(sizeField.getText()), nameField.getText(),
-                        phoneField.getText(), calcWaitTime.waitTimeAlgorithm() );
-                addParty(newparty);
+            if (checkAddParty(inputFields[2].getText(), inputFields[0].getText())) {
+                WaitTime calcWaitTime = new WaitTime();
+                Party newParty = new Party(
+                        Integer.parseInt(inputFields[0].getText()),
+                        inputFields[1].getText(),
+                        inputFields[2].getText(),
+                        calcWaitTime.waitTimeAlgorithm()
+                );
+                addParty(newParty);
                 dialog.close();
             }
         });
-
-
-        dialogVbox.getChildren().add(addButton);
-        Scene dialogScene = new Scene(dialogVbox, 300, 400);
-        dialog.setScene(dialogScene);
-        dialog.showAndWait();
+        return addButton;
     }
 
     private boolean checkAddParty(String phoneNumber, String partySize) {
