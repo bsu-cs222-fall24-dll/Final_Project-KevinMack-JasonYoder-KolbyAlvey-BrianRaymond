@@ -35,7 +35,7 @@
             </Button>
       </VBox>
    <VBox id="order1VBox" prefHeight="324.0" prefWidth="260.0" visible="false">
-      <children>
+
          <TextField id="order1ID" alignment="CENTER" editable="false" prefHeight="38.0" prefWidth="185.0">
             <font>
                <Font name="System Bold" size="16.0" />
@@ -47,7 +47,7 @@
             </font>
          </TextArea>
          <HBox prefHeight="41.0" prefWidth="260.0">
-            <children>
+
                <TextField id="order1Timer" alignment="CENTER" editable="false" prefHeight="38.0" prefWidth="133.0" text="0:00">
                   <font>
                      <Font size="17.0" />
@@ -58,12 +58,12 @@
                      <Font size="14.0" />
                   </font>
                </Button>
-            </children>
+
          </HBox>
-      </children>
+
    </VBox>
    <VBox id="order2VBox" prefHeight="200.0" prefWidth="100.0" visible="false" GridPane.columnIndex="1">
-      <children>
+
          <TextField id="order2ID" alignment="CENTER" editable="false" prefHeight="38.0" prefWidth="185.0">
             <font>
                <Font name="System Bold" size="16.0" />
@@ -75,7 +75,7 @@
             </font>
          </TextArea>
          <HBox prefHeight="41.0" prefWidth="260.0">
-            <children>
+
                <TextField id="order2Timer" alignment="CENTER" editable="false" prefHeight="38.0" prefWidth="133.0" text="0:00">
                   <font>
                      <Font size="17.0" />
@@ -86,12 +86,10 @@
                      <Font size="14.0" />
                   </font>
                </Button>
-            </children>
+
          </HBox>
-      </children>
    </VBox>
    <VBox id="order3VBox" prefHeight="200.0" prefWidth="100.0" visible="false" GridPane.columnIndex="2">
-      <children>
          <TextField id="order3ID" alignment="CENTER" editable="false" prefHeight="38.0" prefWidth="185.0">
             <font>
                <Font name="System Bold" size="16.0" />
@@ -103,7 +101,6 @@
             </font>
          </TextArea>
          <HBox prefHeight="41.0" prefWidth="260.0">
-            <children>
                <TextField id="order3Timer" alignment="CENTER" editable="false" prefHeight="38.0" prefWidth="133.0" text="0:00">
                   <font>
                      <Font size="17.0" />
@@ -114,12 +111,9 @@
                      <Font size="14.0" />
                   </font>
                </Button>
-            </children>
          </HBox>
-      </children>
    </VBox>
    <VBox id="order4VBox" prefHeight="200.0" prefWidth="100.0" visible="false" GridPane.rowIndex="1">
-      <children>
          <TextField id="order4ID" alignment="CENTER" editable="false" prefHeight="38.0" prefWidth="185.0">
             <font>
                <Font name="System Bold" size="16.0" />
@@ -131,7 +125,6 @@
             </font>
          </TextArea>
          <HBox prefHeight="41.0" prefWidth="260.0">
-            <children>
                <TextField id="order4Timer" alignment="CENTER" editable="false" prefHeight="38.0" prefWidth="133.0" text="0:00">
                   <font>
                      <Font size="17.0" />
@@ -142,12 +135,9 @@
                      <Font size="14.0" />
                   </font>
                </Button>
-            </children>
          </HBox>
-      </children>
    </VBox>
    <VBox id="order5VBox" prefHeight="200.0" prefWidth="100.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
-      <children>
          <TextField id="order5ID" alignment="CENTER" editable="false" prefHeight="38.0" prefWidth="185.0">
             <font>
                <Font name="System Bold" size="16.0" />
@@ -159,7 +149,6 @@
             </font>
          </TextArea>
          <HBox prefHeight="41.0" prefWidth="260.0">
-            <children>
                <TextField id="order5Timer" alignment="CENTER" editable="false" prefHeight="38.0" prefWidth="133.0" text="0:00">
                   <font>
                      <Font size="17.0" />
@@ -170,12 +159,9 @@
                      <Font size="14.0" />
                   </font>
                </Button>
-            </children>
          </HBox>
-      </children>
    </VBox>
    <VBox id="order6VBox" prefHeight="200.0" prefWidth="100.0" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
-      <children>
          <TextField id="order6ID" alignment="CENTER" editable="false" prefHeight="38.0" prefWidth="185.0">
             <font>
                <Font name="System Bold" size="16.0" />
@@ -187,7 +173,6 @@
             </font>
          </TextArea>
          <HBox prefHeight="41.0" prefWidth="260.0">
-            <children>
                <TextField id="order6Timer" alignment="CENTER" editable="false" prefHeight="38.0" prefWidth="133.0" text="0:00">
                   <font>
                      <Font size="17.0" />
@@ -198,8 +183,6 @@
                      <Font size="14.0" />
                   </font>
                </Button>
-            </children>
          </HBox>
-      </children>
    </VBox>
 </GridPane>
