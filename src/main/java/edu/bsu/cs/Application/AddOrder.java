@@ -2,51 +2,53 @@ package edu.bsu.cs.Application;
 
 import edu.bsu.cs.Order;
 import edu.bsu.cs.FetchFXML;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import edu.bsu.cs.SingletonDataStore;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class AddOrder {
+    SingletonDataStore data = SingletonDataStore.getInstance();
+    private final List<Order> orderList = data.getOrderList();
 
     private static final String[] MENUITEMS = {"cheeseburger", "bacon-burger", "ham-and-cheese",
             "chicken-sandwich", "cobb-salad", "chicken-tenders", "straight-fries",
             "curly-fries", "mac-n-cheese", "side-salad", "fruit-plate", "applesauce",
             "fountain-drink", "lemonade", "water"};
 
-    List<Order> listOfOrders = new ArrayList<>();
 
-    public void showAddOrder(Parent kitchenReference) {
+    public void showAddOrder() {
         Stage orderStage = new Stage();
         Parent addOrderFXML = FetchFXML.loadFXML("AddOrder.fxml");
         Scene orderScreen = new Scene(addOrderFXML);
         orderScreen.getRoot().requestFocus();
-        setButtonActions(Objects.requireNonNull(addOrderFXML));
+        setButtonActions(Objects.requireNonNull(addOrderFXML), orderStage);
         orderStage.setScene(orderScreen);
         orderStage.setResizable(false);
-        orderStage.show();
-        setUpSubmitOrderButton(Objects.requireNonNull(addOrderFXML), orderStage, kitchenReference);
+        orderStage.showAndWait();
     }
 
-    private void setButtonActions(Parent orderScreen) {
+    private void setButtonActions(Parent orderScreen, Stage orderStage) {
         TextArea orderBox = (TextArea) orderScreen.lookup("#orderBox");
         TextField specialInstructionsField = (TextField) orderScreen.lookup("#specialInstructions");
+        Button submitOrderButton = (Button) orderScreen.lookup("#submitOrderButton");
 
         for (String item : MENUITEMS) {
             Button itemButton = (Button) orderScreen.lookup("#" + item);
             itemButton.setOnAction(e -> appendToOrderBox(itemButton.getText(), specialInstructionsField, orderBox));
         }
+
+        submitOrderButton.setOnAction(e -> {
+            Order newOrder = new Order(orderBox.getText());
+            orderList.add(newOrder);
+            orderStage.close();
+        });
     }
 
     private void appendToOrderBox(String foodItem, TextField specialInstructionsField, TextArea orderBox) {
@@ -56,92 +58,6 @@ public class AddOrder {
             orderBox.appendText("--" + specialInstructions + "\n");
         }
         specialInstructionsField.clear();
-    }
-
-    private void setUpSubmitOrderButton(Parent orderScreen, Stage orderStage, Parent kitchenReference){
-        Button submitOrderButton = (Button) orderScreen.lookup("#submitOrderButton");
-        TextArea orderBox = (TextArea) orderScreen.lookup("#orderBox");
-        submitOrderButton.setOnAction(e -> {
-            Order newOrder = new Order(orderBox.getText());
-            VBox orderVBox = setUpNewOrder(newOrder, kitchenReference);
-            addOrderToScreen(orderVBox, kitchenReference);
-            listOfOrders.add(newOrder);
-            orderStage.close();
-        });
-    }
-
-    private VBox setUpNewOrder(Order order, Parent kitchen) {
-        VBox orderBox = (VBox) FetchFXML.loadFXML("BlankOrder.fxml");
-        TextField idField = (TextField) Objects.requireNonNull(orderBox).lookup("#id");
-        TextArea detailsField = (TextArea) Objects.requireNonNull(orderBox).lookup("#orderDetails");
-        Button clearButton = (Button) orderBox.lookup("#clearButton");
-        TextField timerField = (TextField) orderBox.lookup("#timerField");
-
-        idField.setText(String.valueOf(order.getId()));
-        detailsField.setText(order.getDetails());
-
-
-        int[] seconds = {0};
-
-        Timeline timer = new Timeline(
-                new KeyFrame(Duration.seconds(1), e -> {
-                    seconds[0]++;
-                    int minutes = seconds[0] / 60;
-                    int remainingSeconds = seconds[0] % 60;
-                    String timeText = String.format("%d:%02d", minutes, remainingSeconds);
-                    timerField.setText(timeText);
-                })
-        );
-        timer.setCycleCount(Timeline.INDEFINITE);
-        timer.play();
-
-        clearButton.setOnAction(e -> {
-            detailsField.clear();
-            idField.clear();
-            timer.stop();
-            seconds[0] = 0;
-            timerField.setText("0:00");
-            clear(order, kitchen);
-        });
-
-        return orderBox;
-    }
-
-
-
-    private void addOrderToScreen(VBox orderBox, Parent orderScreen) {
-        int length = listOfOrders.size();
-        int row, column;
-        GridPane pane = (GridPane) orderScreen.lookup("#gridPane");
-
-        if (length < 3) {
-            row = 0;
-        } else if (length < 6) {
-            row = 1;
-        } else {
-            row = 2;
-        }
-        column = length % 3;
-        if (listOfOrders.size() < 6) {
-            pane.add(orderBox, column, row);
-        }
-
-    }
-
-    private void clear(Order order, Parent kitchen) {
-
-        List<Order> currentOrders = new ArrayList<>();
-        for (Order currentOrder : listOfOrders) {
-            if (currentOrder.getId() != order.getId()) {
-                currentOrders.add(currentOrder);
-            }
-        }
-        listOfOrders.removeAll(listOfOrders);
-        for (Order currentOrder : currentOrders) {
-            VBox orderVBox = setUpNewOrder(currentOrder, kitchen);
-            addOrderToScreen(orderVBox, kitchen);
-            listOfOrders.add(currentOrder);
-        }
     }
 
 }
