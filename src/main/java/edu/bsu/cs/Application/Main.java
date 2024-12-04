@@ -37,6 +37,8 @@ public class Main extends Application {
         buttonManager.setupRemoveGuestButton(waitlist);
         buttonManager.setupTableButtons(tables);
         buttonManager.setupAddOrderButton(Objects.requireNonNull(kitchen));
+        buttonManager.setupClearOrderButtons(Objects.requireNonNull(kitchen));
+
 
         TabListener tabListener = new TabListener(screenManager);
         tabListener.setupWaitlistListener(root);

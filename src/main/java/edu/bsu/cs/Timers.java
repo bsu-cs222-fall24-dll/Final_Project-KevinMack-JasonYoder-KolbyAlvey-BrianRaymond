@@ -8,7 +8,7 @@ import java.util.TimerTask;
 
 public class Timers {
     SingletonDataStore data = SingletonDataStore.getInstance();
-    private final Map<Integer, TimerTask> timerTasks = data.getTimerTasks();
+    private final Map<Integer, TimerTask> timerTasks = data.getTableTimerTasks();
     private final Map<Integer, Integer> elapsedTime = data.getElapsedTime();
     private final Timer timer = new Timer(true);
 

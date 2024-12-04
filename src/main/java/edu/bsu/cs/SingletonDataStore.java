@@ -6,7 +6,7 @@ public class SingletonDataStore {
     private static SingletonDataStore instance;
     private final List<Party> partyList;
     private final Phonebook phonebook;
-    private final Map<Integer, TimerTask> timerTasks;
+    private final Map<Integer, TimerTask> tableTimerTasks;
     private final Map<Integer, Integer> elapsedTime;
     List<Order> orderList;
 
@@ -14,7 +14,7 @@ public class SingletonDataStore {
     private SingletonDataStore() {
         partyList = new ArrayList<>();
         phonebook = new Phonebook("src/main/resources/restaurantData.csv");
-        timerTasks = new HashMap<>();
+        tableTimerTasks = new HashMap<>();
         elapsedTime = new HashMap<>();
         orderList = new ArrayList<>();
     }
@@ -34,8 +34,8 @@ public class SingletonDataStore {
         return phonebook;
     }
 
-    public Map<Integer, TimerTask> getTimerTasks() {
-        return timerTasks;
+    public Map<Integer, TimerTask> getTableTimerTasks() {
+        return tableTimerTasks;
     }
 
     public Map<Integer, Integer> getElapsedTime() {

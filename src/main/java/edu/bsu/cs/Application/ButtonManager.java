@@ -1,8 +1,8 @@
 package edu.bsu.cs.Application;
 
+
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,6 +62,20 @@ public class ButtonManager {
             orderScreen.showAddOrder();
             manager.updateOrderScreen(kitchen);
         });
+    }
+
+    public void setupClearOrderButtons(Parent kitchen) {
+        RemoveOrder remover = new RemoveOrder();
+        KitchenUpdate manager = new KitchenUpdate();
+
+        for (int i = 1; i < 7; i++) {
+            Button clearOrderButton = (Button) kitchen.lookup("#order" + i + "Clear");
+            int index = i - 1;
+            clearOrderButton.setOnAction(e -> {
+                remover.removeOrder(index, kitchen);
+                manager.updateOrderScreen(kitchen);
+            });
+        }
     }
 
 }

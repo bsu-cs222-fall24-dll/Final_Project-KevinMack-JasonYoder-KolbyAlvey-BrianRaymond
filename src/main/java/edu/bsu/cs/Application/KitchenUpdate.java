@@ -21,12 +21,19 @@ public class KitchenUpdate {
     }
 
     private void fillOrders (Parent kitchen) {
-        for (int i = 0; i < Math.min(6, orderList.size()); i++) {
+        for (int i = 0; i < 6; i++) {
             VBox order = (VBox) kitchen.lookup("#order" + (i + 1) + "VBox");
             TextField ID = (TextField) order.lookup("#order" + (i + 1) + "ID");
             TextArea details = (TextArea) order.lookup("#order" + (i + 1) + "Details");
-            ID.setText(String.valueOf(orderList.get(i).getId()));
-            details.setText(orderList.get(i).getDetails());
+
+            if (i < orderList.size()) {
+                Order currentOrder = orderList.get(i);
+                ID.setText(String.valueOf(currentOrder.getId()));
+                details.setText(currentOrder.getDetails());
+            } else {
+                ID.clear();
+                details.clear();
+            }
         }
     }
 
