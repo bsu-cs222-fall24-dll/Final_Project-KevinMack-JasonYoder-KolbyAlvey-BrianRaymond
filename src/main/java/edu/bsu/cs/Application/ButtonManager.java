@@ -1,6 +1,11 @@
 package edu.bsu.cs.Application;
 
 
+import edu.bsu.cs.Application.Kitchen.AddOrder;
+import edu.bsu.cs.Application.Kitchen.KitchenUpdate;
+import edu.bsu.cs.Application.Kitchen.RemoveOrder;
+import edu.bsu.cs.Application.Waitlist.PartyRegister;
+import edu.bsu.cs.Application.Waitlist.PartyRemover;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import java.util.HashMap;

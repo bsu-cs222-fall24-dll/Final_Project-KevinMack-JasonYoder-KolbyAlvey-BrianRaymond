@@ -1,6 +1,6 @@
 package edu.bsu.cs;
 
-import edu.bsu.cs.Application.AddOrder;
+import edu.bsu.cs.Application.Kitchen.AddOrder;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 

@@ -1,5 +1,7 @@
 package edu.bsu.cs.Application;
 
+import edu.bsu.cs.Application.Waitlist.PartyRegister;
+import edu.bsu.cs.Application.Waitlist.PartyRemover;
 import edu.bsu.cs.FetchFXML;
 import javafx.application.Application;
 import javafx.scene.Parent;

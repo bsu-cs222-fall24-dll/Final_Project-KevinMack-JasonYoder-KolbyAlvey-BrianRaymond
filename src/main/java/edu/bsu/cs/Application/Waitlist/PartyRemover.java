@@ -1,9 +1,8 @@
-package edu.bsu.cs.Application;
+package edu.bsu.cs.Application.Waitlist;
 
 import edu.bsu.cs.Party;
 import edu.bsu.cs.SingletonDataStore;
 import javafx.scene.control.ChoiceDialog;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.util.HashMap;

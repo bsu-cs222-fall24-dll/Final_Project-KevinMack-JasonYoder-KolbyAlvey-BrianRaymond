@@ -1,4 +1,4 @@
-package edu.bsu.cs.Application;
+package edu.bsu.cs.Application.Waitlist;
 
 import edu.bsu.cs.Party;
 import edu.bsu.cs.SingletonDataStore;
