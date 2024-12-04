@@ -15,7 +15,12 @@ public class KitchenUpdate {
     List<Order> orderList = data.getOrderList();
 
     public void updateOrderScreen(Parent kitchen) {
+        fillOrders(kitchen);
+        makeOrdersVisible(kitchen);
         showMoreOrders(kitchen);
+    }
+
+    private void fillOrders (Parent kitchen) {
         for (int i = 0; i < Math.min(6, orderList.size()); i++) {
             VBox order = (VBox) kitchen.lookup("#order" + (i + 1) + "VBox");
             TextField ID = (TextField) order.lookup("#order" + (i + 1) + "ID");
@@ -23,7 +28,14 @@ public class KitchenUpdate {
             ID.setText(String.valueOf(orderList.get(i).getId()));
             details.setText(orderList.get(i).getDetails());
         }
+    }
 
+    private void makeOrdersVisible(Parent kitchen) {
+        for (int i = 0; i < 6; i++) {
+            VBox order = (VBox) kitchen.lookup("#order" + (i + 1) + "VBox");
+            TextField ID = (TextField) order.lookup("#order" + (i + 1) + "ID");
+            order.setVisible(!ID.getText().isEmpty());
+        }
     }
 
     private void showMoreOrders(Parent kitchen) {
