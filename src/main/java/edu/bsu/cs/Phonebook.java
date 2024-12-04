@@ -4,6 +4,7 @@ package edu.bsu.cs;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -45,8 +46,11 @@ public class Phonebook {
     }
 
     private void saveEntryToCSV(String phoneNumber, String name) {
-        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(csvFilePath))) {
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(csvFilePath),
+                StandardOpenOption.CREATE,
+                StandardOpenOption.APPEND)) {
             writer.write(phoneNumber + "," + name);
+            writer.newLine();
         } catch (IOException e) {
             System.err.println("There was an error writing to the CSV file: " + e.getMessage());
         }
