@@ -1,12 +1,6 @@
 package edu.bsu.cs;
 
-import java.util.Comparator;
-import java.util.List;
-
 public class PartyRegisterInputValidation {
-    SingletonDataStore data = SingletonDataStore.getInstance();
-    private final List<Party> partyList = data.getPartyList();
-    private final Phonebook phonebook = data.getPhonebook();
 
     public String formatPhoneNumber(String phoneNumber) {
         String cleanPhoneNumber = phoneNumber.replaceAll("\\D", "");
@@ -40,10 +34,4 @@ public class PartyRegisterInputValidation {
         }
     }
 
-    public void addPartyToData(int size, String name, String phoneNumber, int waitTime) {
-        Party party = new Party(size, name, phoneNumber, waitTime);
-        partyList.add(party);
-        phonebook.addNewEntry(party.getPhoneNumber(), party.getName());
-        partyList.sort(Comparator.comparingInt(Party::getWaitTime));
-    }
 }

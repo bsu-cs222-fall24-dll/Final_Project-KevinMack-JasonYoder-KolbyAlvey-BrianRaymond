@@ -10,6 +10,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -29,6 +31,8 @@ public class PartyRegister extends PartyHBoxBuilder {
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.setTitle("Add Party");
         dialog.setResizable(false);
+
+        WaitTime calcWaitTime = new WaitTime();
 
         TextField sizeField = new TextField();
         TextField nameField = new TextField();
@@ -55,12 +59,13 @@ public class PartyRegister extends PartyHBoxBuilder {
 
         Button addButton = new Button("Add");
 
+
+
         addButton.setOnAction(e -> {
             if(checkAddParty(phoneField.getText(), sizeField.getText())) {
-                addParty(
-                        Integer.parseInt(sizeField.getText()),
-                        nameField.getText(), phoneField.getText()
-                );
+                Party newparty = new Party(Integer.parseInt(sizeField.getText()), nameField.getText(),
+                        phoneField.getText(), calcWaitTime.waitTimeAlgorithm() );
+                addParty(newparty);
                 dialog.close();
             }
         });
@@ -89,9 +94,14 @@ public class PartyRegister extends PartyHBoxBuilder {
         return true;
     }
 
-    private void addParty(int size, String name, String phoneNumber) {
-        WaitTime calcWaitTime = new WaitTime();
-        registerLogic.addPartyToData(size, name, phoneNumber, calcWaitTime.waitTimeAlgorithm());
+    private void addParty(Party party) {
+
+        partyList.add(party);
+        phonebook.addNewEntry(party.getPhoneNumber(), party.getName());
+        partyList.sort(Comparator.comparingInt(Party::getWaitTime));
+        sortPartyList();
+    }
+    public void sortPartyList() {
         partyListVBOX.getChildren().clear();
         for (Party sortedParty : partyList) {
             HBox partyHBox = createPartyHBox(sortedParty);
