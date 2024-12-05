@@ -36,10 +36,5 @@ public class Order {
         this.orderId = id;
     }
 
-    // Decrease the counter after an order is removed
-    public static void decreaseCounter() {
-        if (orderIdCounter > 0) {
-            orderIdCounter--;
-        }
-    }
+
 }

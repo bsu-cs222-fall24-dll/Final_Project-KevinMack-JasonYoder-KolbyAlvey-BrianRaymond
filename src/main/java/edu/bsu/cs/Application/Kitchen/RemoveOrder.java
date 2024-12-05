@@ -18,19 +18,12 @@ public class RemoveOrder {
             return;
         }
 
-
         orderList.remove(index);
-
-
-        Order.decreaseCounter();
-
 
         reassignOrderIds();
 
-
         KitchenUpdate manager = new KitchenUpdate();
         manager.updateOrderScreen(kitchen);
-
 
         resetOrderUI(index, kitchen);
     }
@@ -45,28 +38,18 @@ public class RemoveOrder {
 
     private void resetOrderUI(int index, Parent kitchen) {
         VBox order = (VBox) kitchen.lookup("#order" + (index + 1) + "VBox");
-        if (order != null) {
-            TextField timerField = (TextField) order.lookup("#order" + (index + 1) + "Timer");
+
+        TextField timerField = (TextField) order.lookup("#order" + (index + 1) + "Timer");
+        TextField IDField = (TextField) order.lookup("#order" + (index + 1) + "ID");
+        TextArea detailsField = (TextArea) order.lookup("#order" + (index + 1) + "Details");
+
+        orderList.get(index).;
+        timerField.setText("0:00");
+        IDField.clear();
+        detailsField.clear();
 
 
-            if (timerField != null) {
-                timerField.setText("0:00");
-            }
+        order.setVisible(false);
 
-
-            TextField IDField = (TextField) order.lookup("#order" + (index + 1) + "ID");
-            if (IDField != null) {
-                IDField.clear();
-            }
-
-
-            TextArea detailsField = (TextArea) order.lookup("#order" + (index + 1) + "Details");
-            if (detailsField != null) {
-                detailsField.clear();
-            }
-
-
-            order.setVisible(false);
-        }
     }
 }

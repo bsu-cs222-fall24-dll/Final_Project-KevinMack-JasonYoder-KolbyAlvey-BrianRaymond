@@ -75,29 +75,17 @@ public class KitchenUpdate {
                 VBox orderBox = (VBox) kitchen.lookup("#order" + (i + 1) + "VBox");
                 TextField timerField = (TextField) orderBox.lookup("#order" + (i + 1) + "Timer");
 
+                if (orderBox.isVisible() && order.getElapsedTimeInSeconds() == 0) {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
 
-                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-                    if (orderBox.isVisible()) {
                         order.incrementTime();
                         updateTimerDisplay(order, timerField);
-                    } else {
 
-                        order.resetTime();
-                        updateTimerDisplay(order, timerField);
-                    }
-                }));
-
-
-                timeline.setCycleCount(Timeline.INDEFINITE);
-
-
-                if (orderBox.isVisible()) {
+                    }));
+                    timeline.setCycleCount(Timeline.INDEFINITE);
                     timeline.play();
-                } else {
-
-                    order.resetTime();
-                    updateTimerDisplay(order, timerField);
                 }
+
             }
         }
     }
