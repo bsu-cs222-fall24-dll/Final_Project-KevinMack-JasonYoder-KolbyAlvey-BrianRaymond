@@ -30,4 +30,8 @@ public class Order {
         return format.format(date);
     }
 
+    public static void resetCounter() {
+        orderIdCounter = 0;
+    }
+
 }
