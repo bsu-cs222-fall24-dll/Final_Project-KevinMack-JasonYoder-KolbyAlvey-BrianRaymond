@@ -1,5 +1,6 @@
-package edu.bsu.cs;
+package edu.bsu.cs.Application;
 
+import edu.bsu.cs.SingletonDataStore;
 import javafx.application.Platform;
 import javafx.scene.control.TextField;
 import java.util.Map;

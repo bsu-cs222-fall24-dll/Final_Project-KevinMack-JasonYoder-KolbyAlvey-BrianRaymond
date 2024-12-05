@@ -22,10 +22,15 @@ class PhonebookTest {
     }
 
     @Test
-    void testLoadPhoneBook() {
+    void testLoadPhoneBookKevin() {
         assertEquals("kevin", phonebook.getNameByPhoneNumber("3177375487"));
+    }
+
+    @Test
+    void testLoadPhoneBookBrian() {
         assertEquals("Brian", phonebook.getNameByPhoneNumber("3177245960"));
     }
+
 
     @Test
     void testAddNewEntry() {
@@ -37,8 +42,12 @@ class PhonebookTest {
     }
 
     @Test
-    void testGetNameByPhoneNumber() {
+    void testGetNameByPhoneNumberKevin() {
         assertEquals("kevin", phonebook.getNameByPhoneNumber("3177375487"));
+    }
+
+    @Test
+    void testGetNameByPhoneNumberNull() {
         assertNull(phonebook.getNameByPhoneNumber("0000000000"));
     }
 

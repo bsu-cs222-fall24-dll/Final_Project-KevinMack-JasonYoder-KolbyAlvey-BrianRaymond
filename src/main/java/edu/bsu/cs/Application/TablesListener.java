@@ -1,6 +1,5 @@
 package edu.bsu.cs.Application;
 
-import edu.bsu.cs.Timers;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;

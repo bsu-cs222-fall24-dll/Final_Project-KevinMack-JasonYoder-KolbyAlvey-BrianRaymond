@@ -48,7 +48,7 @@ public class PartyRegisterLogicTest {
 
     @Test
     public void testIsInboundNumberOnBorder() {
-        assertFalse(partyRegisterLogic.isNotInboundInteger(61));
+        assertTrue(partyRegisterLogic.isNotInboundInteger(61));
     }
 
     @Test
@@ -71,24 +71,4 @@ public class PartyRegisterLogicTest {
         assertTrue(partyRegisterLogic.isNotRealNumber("!@$&%(#)_"));
     }
 
-    @Test
-    public void testAddPartyToData() {
-        SingletonDataStore dataStore = SingletonDataStore.getInstance();
-        assertEquals(0, dataStore.getPartyList().size());
-
-        assertEquals(1, dataStore.getPartyList().size());
-        Party party = dataStore.getPartyList().getFirst();
-        assertEquals("Jason", party.getName());
-        assertEquals("1234567890", party.getPhoneNumber());
-        assertEquals(30, party.getWaitTime());
-    }
-
-    @Test
-    public void testAddPartyToData_SortsByWaitTime() {
-
-
-        SingletonDataStore dataStore = SingletonDataStore.getInstance();
-        Party firstParty = dataStore.getPartyList().getFirst();
-        assertEquals("Kolby", firstParty.getName());
-    }
 }

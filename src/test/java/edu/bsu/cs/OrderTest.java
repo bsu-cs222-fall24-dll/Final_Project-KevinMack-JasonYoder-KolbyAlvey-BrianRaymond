@@ -32,8 +32,8 @@ public class OrderTest {
     @Test
     public void testGetSecondId() {
         /*
-        Weak warning for testOrder1 never used is suppressed,
-        it's created to test that the id incrementation works as planned.
+        Weak warning for testOrder1 never used is suppressed.
+        It's created to test that the id incrementation works as planned.
          */
         Order testOrder1 = new Order("Burger\nFries\nLemonade");
         Order testOrder2 = new Order("Burger\nFries\nWater");
