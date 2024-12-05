@@ -20,7 +20,6 @@ public class RemoveOrder {
 
         orderList.remove(index);
 
-        reassignOrderIds();
 
         KitchenUpdate manager = new KitchenUpdate();
         manager.updateOrderScreen(kitchen);
@@ -28,13 +27,6 @@ public class RemoveOrder {
         resetOrderUI(index, kitchen);
     }
 
-    private void reassignOrderIds() {
-        for (int i = 0; i < orderList.size(); i++) {
-            Order order = orderList.get(i);
-
-            order.setId(i + 1);
-        }
-    }
 
     private void resetOrderUI(int index, Parent kitchen) {
         VBox order = (VBox) kitchen.lookup("#order" + (index + 1) + "VBox");
@@ -43,7 +35,6 @@ public class RemoveOrder {
         TextField IDField = (TextField) order.lookup("#order" + (index + 1) + "ID");
         TextArea detailsField = (TextArea) order.lookup("#order" + (index + 1) + "Details");
 
-        orderList.get(index);
         timerField.setText("0:00");
         IDField.clear();
         detailsField.clear();
