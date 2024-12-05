@@ -1,32 +1,33 @@
 package edu.bsu.cs;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Order {
-    private final String orderInfo;
+    private final String orderDetails;
     private static int orderIdCounter = 0;
     private final int orderId;
-    private int elapsedTimeInSeconds;
+    private final long creationTime;
 
     public Order(String orderInfo) {
-        this.orderInfo = orderInfo;
+        this.orderDetails = orderInfo;
         this.orderId = ++orderIdCounter;
-        this.elapsedTimeInSeconds = 0;
+        this.creationTime = System.currentTimeMillis();
     }
 
     public String getDetails() {
-        return orderInfo;
+        return orderDetails;
     }
 
     public int getId() {
         return orderId;
     }
 
-    public int getElapsedTimeInSeconds() {
-        return elapsedTimeInSeconds;
+    public String getCreationTime() {
+        Date date = new Date(Long.parseLong(String.valueOf(creationTime)));
+        DateFormat format = new SimpleDateFormat("hh:mm");
+        return format.format(date);
     }
-
-    public void incrementTime() {
-        this.elapsedTimeInSeconds++;
-    }
-
 
 }
