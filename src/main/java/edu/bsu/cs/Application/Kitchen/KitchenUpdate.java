@@ -17,6 +17,8 @@ public class KitchenUpdate {
     SingletonDataStore data = SingletonDataStore.getInstance();
     List<Order> orderList = data.getOrderList();
 
+    private Timeline timeline;
+
     public void updateOrderScreen(Parent kitchen) {
         fillOrders(kitchen);
         makeOrdersVisible(kitchen);
@@ -69,31 +71,34 @@ public class KitchenUpdate {
 
     // Start the timer for each order
     private void startOrderTimers(Parent kitchen) {
-        for (int i = 0; i < 6; i++) {
-            if (i < orderList.size()) {
-                Order order = orderList.get(i);
-                VBox orderBox = (VBox) kitchen.lookup("#order" + (i + 1) + "VBox");
-                TextField timerField = (TextField) orderBox.lookup("#order" + (i + 1) + "Timer");
+        if (timeline != null) {
+            timeline.stop();
+            timeline.getKeyFrames().removeAll();
+            timeline.playFromStart();
+        } else {
+            timeline = new Timeline();
+            timeline.setCycleCount(Timeline.INDEFINITE);
 
-                if (orderBox.isVisible() && order.getElapsedTimeInSeconds() == 0) {
-                    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+        }
 
-                        order.incrementTime();
-                        updateTimerDisplay(order, timerField);
+        for (Order order : orderList) {
+            VBox orderBox = (VBox) kitchen.lookup("#order" + (orderList.indexOf(order) + 1) + "VBox");
+            TextField timerField = (TextField) orderBox.lookup("#order" + (orderList.indexOf(order) + 1) + "Timer");
 
-                    }));
-                    timeline.setCycleCount(Timeline.INDEFINITE);
-                    timeline.play();
-                }
-
+            if (orderBox.isVisible() && order.getElapsedTimeInSeconds() == 0) {
+                timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1), e -> {
+                    updateTimerDisplay(order, timerField);
+                }));
             }
         }
+
+        timeline.play();
     }
 
     private void updateTimerDisplay(Order order, TextField timerField) {
-        int minutes = order.getElapsedTimeInSeconds() / 60;
-        int seconds = order.getElapsedTimeInSeconds() % 60;
-        String timeString = String.format("%02d:%02d", minutes, seconds);
+        double currentTime = System.currentTimeMillis();
+        System.out.println("current time: " + currentTime + "| order time: " + order.getMilliTime());
+        String timeString = String.format("%.2f", currentTime - order.getMilliTime());
         timerField.setText(timeString);
     }
 }
