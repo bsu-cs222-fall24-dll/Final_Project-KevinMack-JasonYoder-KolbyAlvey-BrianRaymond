@@ -43,7 +43,7 @@ public class RemoveOrder {
         TextField IDField = (TextField) order.lookup("#order" + (index + 1) + "ID");
         TextArea detailsField = (TextArea) order.lookup("#order" + (index + 1) + "Details");
 
-        orderList.get(index).;
+        orderList.get(index);
         timerField.setText("0:00");
         IDField.clear();
         detailsField.clear();

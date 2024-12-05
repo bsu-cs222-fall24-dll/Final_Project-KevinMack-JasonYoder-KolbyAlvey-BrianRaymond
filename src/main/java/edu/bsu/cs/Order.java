@@ -5,8 +5,10 @@ public class Order {
     private static int orderIdCounter = 0;
     private int orderId;
     private int elapsedTimeInSeconds;  // Timer in seconds
+    private double milliTime;
 
     public Order(String orderInfo) {
+        this.milliTime = System.currentTimeMillis();
         this.orderInfo = orderInfo;
         this.orderId = ++orderIdCounter;
         this.elapsedTimeInSeconds = 0;  // Initialize timer to 0
@@ -34,6 +36,10 @@ public class Order {
 
     public void setId(int id) {
         this.orderId = id;
+    }
+
+    public double getMilliTime(){
+        return this.milliTime;
     }
 
 
