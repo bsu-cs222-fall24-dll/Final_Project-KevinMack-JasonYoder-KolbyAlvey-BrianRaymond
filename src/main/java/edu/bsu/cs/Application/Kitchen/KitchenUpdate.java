@@ -7,6 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 
 import java.util.List;
 
@@ -18,9 +21,10 @@ public class KitchenUpdate {
         fillOrders(kitchen);
         makeOrdersVisible(kitchen);
         showMoreOrders(kitchen);
+        startOrderTimers(kitchen);
     }
 
-    private void fillOrders (Parent kitchen) {
+    private void fillOrders(Parent kitchen) {
         for (int i = 0; i < 6; i++) {
             VBox order = (VBox) kitchen.lookup("#order" + (i + 1) + "VBox");
             TextField ID = (TextField) order.lookup("#order" + (i + 1) + "ID");
@@ -28,8 +32,13 @@ public class KitchenUpdate {
 
             if (i < orderList.size()) {
                 Order currentOrder = orderList.get(i);
-                ID.setText(String.valueOf(currentOrder.getId()));
-                details.setText(currentOrder.getDetails());
+                if (i == 0 || isOrderVisible(kitchen, i)) {
+                    ID.setText(String.valueOf(currentOrder.getId()));
+                    details.setText(currentOrder.getDetails());
+                } else {
+                    ID.clear();
+                    details.clear();
+                }
             } else {
                 ID.clear();
                 details.clear();
@@ -41,8 +50,16 @@ public class KitchenUpdate {
         for (int i = 0; i < 6; i++) {
             VBox order = (VBox) kitchen.lookup("#order" + (i + 1) + "VBox");
             TextField ID = (TextField) order.lookup("#order" + (i + 1) + "ID");
-            order.setVisible(!ID.getText().isEmpty());
+
+            boolean isVisible = !ID.getText().isEmpty();
+            order.setVisible(isVisible);
         }
+    }
+
+    private boolean isOrderVisible(Parent kitchen, int index) {
+        VBox previousOrder = (VBox) kitchen.lookup("#order" + (index) + "VBox");
+        TextField previousID = (TextField) previousOrder.lookup("#order" + (index) + "ID");
+        return !previousID.getText().isEmpty() && previousOrder.isVisible();
     }
 
     private void showMoreOrders(Parent kitchen) {
@@ -50,4 +67,45 @@ public class KitchenUpdate {
         indicator.setVisible(orderList.size() > 6);
     }
 
+    // Start the timer for each order
+    private void startOrderTimers(Parent kitchen) {
+        for (int i = 0; i < 6; i++) {
+            if (i < orderList.size()) {
+                Order order = orderList.get(i);
+                VBox orderBox = (VBox) kitchen.lookup("#order" + (i + 1) + "VBox");
+                TextField timerField = (TextField) orderBox.lookup("#order" + (i + 1) + "Timer");
+
+
+                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+                    if (orderBox.isVisible()) {
+                        order.incrementTime();
+                        updateTimerDisplay(order, timerField);
+                    } else {
+
+                        order.resetTime();
+                        updateTimerDisplay(order, timerField);
+                    }
+                }));
+
+
+                timeline.setCycleCount(Timeline.INDEFINITE);
+
+
+                if (orderBox.isVisible()) {
+                    timeline.play();
+                } else {
+
+                    order.resetTime();
+                    updateTimerDisplay(order, timerField);
+                }
+            }
+        }
+    }
+
+    private void updateTimerDisplay(Order order, TextField timerField) {
+        int minutes = order.getElapsedTimeInSeconds() / 60;
+        int seconds = order.getElapsedTimeInSeconds() % 60;
+        String timeString = String.format("%02d:%02d", minutes, seconds);
+        timerField.setText(timeString);
+    }
 }
