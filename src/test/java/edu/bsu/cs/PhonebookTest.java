@@ -58,7 +58,6 @@ class PhonebookTest {
         phonebook.addNewEntry(newPhoneNumber, newName);
 
         List<String> lines = Files.readAllLines(Paths.get(csvFilePath));
-        System.out.println("File contents after adding entry: " + lines);
 
         assertTrue(lines.contains(newPhoneNumber + "," + newName), "The CSV file should contain the new entry.");
     }
