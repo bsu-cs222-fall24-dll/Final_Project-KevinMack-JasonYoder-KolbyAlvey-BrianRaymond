@@ -1,5 +1,6 @@
 package edu.bsu.cs.Application;
 
+import edu.bsu.cs.Application.Kitchen.KitchenUpdate;
 import edu.bsu.cs.Application.Waitlist.PartyRegister;
 import edu.bsu.cs.Application.Waitlist.PartyRemover;
 import javafx.application.Application;
@@ -36,6 +37,7 @@ public class Main extends Application {
         PartyRemover partyRemover = new PartyRemover(partyListVBox);
         ButtonManager buttonManager = new ButtonManager(partyRegister, partyRemover);
         TabListener tabListener = new TabListener(screenManager);
+        KitchenUpdate update = new KitchenUpdate();
 
         buttonManager.setupAddGuestButton(waitlist);
         buttonManager.setupRemoveGuestButton(waitlist);
@@ -46,6 +48,8 @@ public class Main extends Application {
         tabListener.setupWaitlistListener(root);
         tabListener.setupTablesListener(root);
         tabListener.setupKitchenListener(root);
+
+        update.updateOrderScreen(kitchen);
 
         screenManager.showWaitlist();
 

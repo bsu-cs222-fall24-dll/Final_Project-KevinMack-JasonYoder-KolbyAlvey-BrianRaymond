@@ -88,23 +88,17 @@ public class KitchenUpdate {
 
         ZonedDateTime currentTime = ZonedDateTime.now(ZoneId.of("America/New_York"));
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm");
         String timeString = currentTime.format(formatter);
         realTimeField.setText(timeString);
     }
-
-
-
-
 
     private void checkOrderTimeout(VBox order, Order currentOrder) {
         String orderCreationTimeString = currentOrder.getCreationTime();
 
         ZonedDateTime currentTime = ZonedDateTime.now(ZoneId.of("America/New_York"));
 
-
         String fullOrderCreationTimeString = currentTime.toLocalDate() + "T" + orderCreationTimeString + currentTime.getOffset();
-
 
         DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
         ZonedDateTime orderCreationTime = ZonedDateTime.parse(fullOrderCreationTimeString, formatter);
