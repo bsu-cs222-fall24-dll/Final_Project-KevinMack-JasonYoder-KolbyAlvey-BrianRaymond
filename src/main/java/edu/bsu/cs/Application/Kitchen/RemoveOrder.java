@@ -18,13 +18,11 @@ public class RemoveOrder {
             return;
         }
 
+        resetOrderUI(index, kitchen);
         orderList.remove(index);
-
 
         KitchenUpdate manager = new KitchenUpdate();
         manager.updateOrderScreen(kitchen);
-
-        resetOrderUI(index, kitchen);
     }
 
 
@@ -36,6 +34,7 @@ public class RemoveOrder {
         TextArea detailsField = (TextArea) order.lookup("#order" + (index + 1) + "Details");
 
         timerField.setText("0:00");
+
         IDField.clear();
         detailsField.clear();
 

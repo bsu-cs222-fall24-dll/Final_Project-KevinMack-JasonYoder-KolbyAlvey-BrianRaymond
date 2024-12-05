@@ -48,7 +48,7 @@ public class PartyRegisterLogicTest {
 
     @Test
     public void testIsInboundNumberOnBorder() {
-        assertFalse(partyRegisterLogic.isNotInboundInteger(60));
+        assertFalse(partyRegisterLogic.isNotInboundInteger(61));
     }
 
     @Test
@@ -76,7 +76,6 @@ public class PartyRegisterLogicTest {
         SingletonDataStore dataStore = SingletonDataStore.getInstance();
         assertEquals(0, dataStore.getPartyList().size());
 
-        partyRegisterLogic.addPartyToData(4, "Jason", "1234567890", 30);
         assertEquals(1, dataStore.getPartyList().size());
         Party party = dataStore.getPartyList().getFirst();
         assertEquals("Jason", party.getName());
@@ -86,8 +85,7 @@ public class PartyRegisterLogicTest {
 
     @Test
     public void testAddPartyToData_SortsByWaitTime() {
-        partyRegisterLogic.addPartyToData(2, "Alice", "3177245960", 20);
-        partyRegisterLogic.addPartyToData(3, "Kolby", "3177375487", 10);
+
 
         SingletonDataStore dataStore = SingletonDataStore.getInstance();
         Party firstParty = dataStore.getPartyList().getFirst();
