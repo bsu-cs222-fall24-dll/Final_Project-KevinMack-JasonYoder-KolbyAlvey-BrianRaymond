@@ -21,7 +21,7 @@ public class KitchenUpdate {
     }
 
     private void fillOrders(Parent kitchen) {
-        int size = Math.min(orderList.size(), 6); // Determine how many orders to display
+        int size = Math.min(orderList.size(), 6);
         for (int i = 0; i < 6; i++) {
             VBox order = (VBox) kitchen.lookup("#order" + (i + 1) + "VBox");
             TextField ID = (TextField) order.lookup("#order" + (i + 1) + "ID");
@@ -29,13 +29,11 @@ public class KitchenUpdate {
             TextField clock = (TextField) order.lookup("#order" + (i + 1) + "Clock");
 
             if (i < size) {
-                // Populate the slot with the order's details
                 Order currentOrder = orderList.get(i);
                 ID.setText(String.valueOf(currentOrder.getId()));
                 details.setText(currentOrder.getDetails());
                 clock.setText(currentOrder.getCreationTime());
             } else {
-                // Clear the slot if no order corresponds to it
                 ID.clear();
                 details.clear();
                 clock.clear();

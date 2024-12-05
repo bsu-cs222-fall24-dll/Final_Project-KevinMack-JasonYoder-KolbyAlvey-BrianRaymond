@@ -1,8 +1,8 @@
 package edu.bsu.cs.Application.Kitchen;
 
 import edu.bsu.cs.Order;
-import edu.bsu.cs.FetchFXML;
 import edu.bsu.cs.SingletonDataStore;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,6 +10,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,14 +25,18 @@ public class AddOrder {
 
 
     public void showAddOrder() {
-        Stage orderStage = new Stage();
-        Parent addOrderFXML = FetchFXML.loadFXML("AddOrder.fxml");
-        Scene orderScreen = new Scene(addOrderFXML);
-        orderScreen.getRoot().requestFocus();
-        setButtonActions(Objects.requireNonNull(addOrderFXML), orderStage);
-        orderStage.setScene(orderScreen);
-        orderStage.setResizable(false);
-        orderStage.showAndWait();
+        try {
+            Stage orderStage = new Stage();
+            Parent addOrderFXML = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AddOrder.fxml")));
+            Scene orderScreen = new Scene(addOrderFXML);
+            orderScreen.getRoot().requestFocus();
+            setButtonActions(Objects.requireNonNull(addOrderFXML), orderStage);
+            orderStage.setScene(orderScreen);
+            orderStage.setResizable(false);
+            orderStage.showAndWait();
+        } catch(IOException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     private void setButtonActions(Parent orderScreen, Stage orderStage) {

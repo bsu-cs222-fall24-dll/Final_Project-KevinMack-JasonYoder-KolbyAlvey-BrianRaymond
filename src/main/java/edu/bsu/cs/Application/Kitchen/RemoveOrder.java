@@ -3,9 +3,6 @@ package edu.bsu.cs.Application.Kitchen;
 import edu.bsu.cs.Order;
 import edu.bsu.cs.SingletonDataStore;
 import javafx.scene.Parent;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 
 import java.util.List;
 
@@ -17,9 +14,7 @@ public class RemoveOrder {
         if (index < 0 || index >= orderList.size()) {
             return;
         }
-
         orderList.remove(index);
-
         KitchenUpdate manager = new KitchenUpdate();
         manager.updateOrderScreen(kitchen);
     }
