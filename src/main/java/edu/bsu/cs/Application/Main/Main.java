@@ -1,4 +1,4 @@
-package edu.bsu.cs.Application;
+package edu.bsu.cs.Application.Main;
 
 import edu.bsu.cs.Application.Kitchen.KitchenUpdate;
 import edu.bsu.cs.Application.Waitlist.PartyRegister;

@@ -1,4 +1,4 @@
-package edu.bsu.cs.Application;
+package edu.bsu.cs.Application.Main;
 
 import javafx.scene.Parent;
 

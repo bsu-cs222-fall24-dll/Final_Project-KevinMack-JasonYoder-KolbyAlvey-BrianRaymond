@@ -1,4 +1,4 @@
-package edu.bsu.cs.Application;
+package edu.bsu.cs.Application.Host;
 
 import edu.bsu.cs.SingletonDataStore;
 import javafx.application.Platform;

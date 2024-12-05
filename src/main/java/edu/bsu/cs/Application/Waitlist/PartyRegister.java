@@ -1,7 +1,7 @@
 package edu.bsu.cs.Application.Waitlist;
 
 import edu.bsu.cs.*;
-import edu.bsu.cs.Application.Alerts;
+import edu.bsu.cs.Application.Main.Alerts;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

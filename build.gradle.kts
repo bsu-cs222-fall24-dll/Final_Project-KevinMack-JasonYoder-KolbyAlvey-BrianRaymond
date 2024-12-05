@@ -30,6 +30,6 @@ javafx {
 }
 
 application {
-    mainClass.set("edu.bsu.cs.Application.Main")
+    mainClass.set("edu.bsu.cs.Application.Main.Main")
 }
 
