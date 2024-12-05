@@ -21,10 +21,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage mainStage) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainScene.fxml")));
-        Parent tables = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Tables.fxml")));
-        Parent kitchen = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Kitchen.fxml")));
-        Parent waitlist = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("WaitlistScreen.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/MainScene.fxml")));
+        Parent tables = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Tables.fxml")));
+        Parent kitchen = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Kitchen.fxml")));
+        Parent waitlist = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/WaitlistScreen.fxml")));
 
         StackPane screens = (StackPane) Objects.requireNonNull(root).lookup("#contentStack");
         VBox partyListVBox = (VBox) Objects.requireNonNull(waitlist).lookup("#partyListVBox");

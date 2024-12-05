@@ -27,7 +27,7 @@ public class AddOrder {
     public void showAddOrder() {
         try {
             Stage orderStage = new Stage();
-            Parent addOrderFXML = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AddOrder.fxml")));
+            Parent addOrderFXML = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/AddOrder.fxml")));
             Scene orderScreen = new Scene(addOrderFXML);
             orderScreen.getRoot().requestFocus();
             setButtonActions(Objects.requireNonNull(addOrderFXML), orderStage);
